@@ -7,7 +7,7 @@
 git clone https://github.com/AEmilioDiStefano/ros2_ws.git
 
 
-## 1)  Create a GZ_SIM_SYSTEM_PLUGIN_PATH system variable
+## 1.  Create a GZ_SIM_SYSTEM_PLUGIN_PATH system variable
 
 ### This will enable the use of our physics plugins.
 
@@ -25,7 +25,7 @@ export GZ_SIM_SYSTEM_PLUGIN_PATH="/opt/ros/jazzy/lib:${GZ_SIM_SYSTEM_PLUGIN_PATH
 Save changes to the .bashrc file and close the editor.
 
 
-## 2) Create a GZ_SIM_RESOURCE_PATH system variable
+## 2. Create a GZ_SIM_RESOURCE_PATH system variable
 
 ### This will allow you to reference models in your /models directory via a <uri></uri> in our SDF world files.  
 
@@ -55,7 +55,7 @@ Now add the code depicted below:
 
 in your SDF world file will load the water_towel model from the /models directory into your world.
 
-## 3) Make sure that the following lines are included in your .bashrc file:
+## 3. Make sure that the following lines are included in your .bashrc file:
 
 ```console
 source /opt/ros/jazzy/setup.bash
