@@ -13,12 +13,12 @@ git clone https://github.com/AEmilioDiStefano/ros2_ws.git
 
 Open the .bashrc file again by typing the following into your terminal from your home directory:
 
-```console
+```shell
 sudo gedit ~/.bashrc
 ```
 
 Now paste the following at the end of the .bashrc file:
-```console
+```shell
 export GZ_SIM_SYSTEM_PLUGIN_PATH="/opt/ros/jazzy/lib:${GZ_SIM_SYSTEM_PLUGIN_PATH}"
 ```
 
@@ -32,12 +32,12 @@ Save changes to the .bashrc file and close the editor.
 
 Open your .bashrc file by typing the following into your terminal from your home directory:
 
-```console
+```shell
 sudo gedit ~/.bashrc
 ```
 
 Now paste the following at the end of the .bashrc file:
-```console
+```shell
 export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RESOURCE_PATH
 ```
 
@@ -45,7 +45,7 @@ Save changes to the .bashrc file and close the editor.
 
 Now add the code depicted below:
 
-```console
+```shell
 <include>
   <name>water_tower</name>
   <uri>model://water_tower/model.sdf</uri>
@@ -57,19 +57,19 @@ in your SDF world file will load the water_towel model from the /models director
 
 ## 3. Make sure that the following lines are included in your .bashrc file:
 
-```console
+```shell
 source /opt/ros/jazzy/setup.bash
 ```
 
-```console
+```shell
 source ~/ros2_ws/install/setup.bash
 ```
 
-```console
+```shell
 export GZ_SIM_SYSTEM_PLUGIN_PATH="/opt/ros/jazzy/lib:${GZ_SIM_SYSTEM_PLUGIN_PATH}"
 ```
 
-```console
+```shell
 export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RESOURCE_PATH
 ```
 
@@ -81,7 +81,7 @@ export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RE
 
 ## Reload the Shell:
 
-```console
+```shell
 source ~/.bashrc
 ```
 
@@ -172,20 +172,20 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard   --ros-args -r cmd_vel:=/e
 
 ### 1. Try opening your world from ROS2 in only Gazebo.
 
-```console
+```shell
 gz sim "$(ros2 pkg prefix my_robot_bringup)/share/my_robot_bringup/worlds/waterworld.sdf" -v4
 ```
 ### 2. If it doesn't open, then build and source your environment again:
 **Build:**
-```console
+```shell
 colcon build
 ```
 **Execute:**
-```console
+```shell
 source ~/ros2_ws/install/setup.bash
 ```
 ### 3. Now try launching again:
-```console
+```shell
 ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
 ```
 **Note:** A file called **_waterworld.sdf_** is referenced in the above commands.  If the world that you are trying to open is not named **_waterworld.sdf_**, then replace **_waterworld.sdf_** with **the name of youe world file** when entering these commands.
