@@ -13,7 +13,7 @@ git clone https://github.com/AEmilioDiStefano/ros2_ws.git
 
 Open the .bashrc file again by typing the following into your terminal from your home directory:
 
-```powershell
+```shell
 sudo gedit ~/.bashrc
 ```
 
