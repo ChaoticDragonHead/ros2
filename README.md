@@ -43,7 +43,7 @@ export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RE
 
 Save changes to the .bashrc file and close the editor.
 
-Now the depicted below:
+Now add the code depicted below:
 
 ```console
 <include>
