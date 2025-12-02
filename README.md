@@ -135,11 +135,17 @@ ros2 launch my_robot_bringup my_robot.launch.xml
 ```
 **Note**: This command will run a **launch file** called my_robot.urdf.xacro which sould already be in your repository.
 
-### 3. Run a control node to control a robot:
+### 3. Run a control node to control a robot with teleop_twist_keyboard:
 ```shell
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 **Note:** In order to conmtrol the robot, **the terminal window running the teleop control node must be selected** rather than the Gazebo simulation window.
+## OR
+###   Run a control node to control a robot with our own robot_legion_teleop_python package:
+```shell
+ros2 run robot_legion_teleop_python legion_teleop_key   --ros-args -p cmd_vel_topic:=/emiliobot/cmd_vel
+```
+**Note:** Replace **in this command** with **the name of the robot** that you woul dlike to **control**.
 
 
 
