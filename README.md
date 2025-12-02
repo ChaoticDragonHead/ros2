@@ -169,17 +169,6 @@ ros2 run robot_legion_teleop_python legion_teleop_key   --ros-args -p cmd_vel_to
 ```
 **Note:** Replace **in this command** with **the name of the robot** that you woul dlike to **control**.
 
-## Restart your Gazebo world and respawn robots from the terminal
-### 1. 
-```shell
-ros2 service call /reset_world std_srvs/srv/Empty {}
-```
-
-### 2. 
-```shell
-ros2 service call /respawn_robots std_srvs/srv/Empty {}
-```
-
 
 
 
