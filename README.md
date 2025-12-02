@@ -140,12 +140,6 @@ ros2 launch my_robot_bringup my_robot.launch.xml
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 **Note:** In order to conmtrol the robot, **the terminal window running the teleop control node must be selected** rather than the Gazebo simulation window.
-## OR
-###   Run a control node to control a robot with our own robot_legion_teleop_python package:
-```shell
-ros2 run robot_legion_teleop_python legion_teleop_key   --ros-args -p cmd_vel_topic:=/emiliobot/cmd_vel
-```
-**Note:** Replace **in this command** with **the name of the robot** that you woul dlike to **control**.
 
 
 
@@ -167,6 +161,13 @@ ros2 launch my_robot_bringup two_robots_waterworld_xacro.launch.py
 ros2 run teleop_twist_keyboard teleop_twist_keyboard   --ros-args -r cmd_vel:=/emiliobot/cmd_vel
 ```
 **Note:** The above command will run a teleop node t control a robot called **emiliobit**.  In order to **run the teleop node to control another robot**, replace the name **emiliobot** in the above command with the name of your robot of chooice (for example, **my_robot**).
+
+## OR
+###   Run a control node to control a robot with our own robot_legion_teleop_python package:
+```shell
+ros2 run robot_legion_teleop_python legion_teleop_key   --ros-args -p cmd_vel_topic:=/emiliobot/cmd_vel
+```
+**Note:** Replace **in this command** with **the name of the robot** that you woul dlike to **control**.
 
 
 
