@@ -2,8 +2,6 @@
 """
 teleop_legion_key.py
 
-Educational version of a keyboard teleoperation node for ROS 2.
-
 This ROS2 teleop node:
 - Uses custom key bindings (arrow keys, WASD-like layout, etc.).
 - Publishes geometry_msgs/Twist to a configurable cmd_vel topic.
