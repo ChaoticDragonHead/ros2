@@ -17,7 +17,7 @@ setup(
     zip_safe=True,
     maintainer='Vitruvian Systems LLC',
     maintainer_email='emilio@viturvian.systems',
-    description='Keyboard teleop node modeled after teleop_twist_keyboard, with custom key bindings.',
+    description='Keyboard teleoperation node for Robot Legion simulations.',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={

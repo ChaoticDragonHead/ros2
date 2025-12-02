@@ -246,8 +246,6 @@ class RobotLegionTeleop(Node):
 
                 if key == '':
                     # No key pressed during this cycle; just continue.
-                    # We do NOT continuously publish the last command here to keep
-                    # behavior close to the typical teleop_twist_keyboard model.
                     continue
 
                 # Exit condition: CTRL-C will actually be handled by ROS, but

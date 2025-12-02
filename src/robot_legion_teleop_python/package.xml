@@ -3,8 +3,7 @@
   <name>robot_legion_teleop_python</name>
   <version>0.0.1</version>
   <description>
-    Keyboard teleoperation node modeled after teleop_twist_keyboard with
-    custom key bindings for Robot Legion simulations.
+    Keyboard teleoperation node for Robot Legion simulations.
   </description>
 
   <maintainer email="emilio@vitruvian.systems">Vitruvian Systems LLC</maintainer>
