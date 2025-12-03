@@ -24,10 +24,10 @@ Space         : stop (all velocities = 0)
 
 SPEED CONTROL (scales, not immediate motion)
 --------------------------------------------
-w             : increase BOTH linear and angular speed scales
-e             : decrease BOTH linear and angular speed scales
+w             : increase BOTH linear and angular speed 
+e             : decrease BOTH linear and angular speed 
 q             : increase ONLY linear speed scale
-r             : increase ONLY angular speed scale
+r             : decrease ONLY linear speed scale
 
 Notes:
 - Speed scales act like global multipliers.
@@ -156,17 +156,19 @@ class RobotLegionTeleop(Node):
         self.speed_bindings = {
             # Increase BOTH linear and angular speeds
             'w': self._increase_both_speeds,
-            '+': self._increase_both_speeds,   # Numpad +
+            '+': self._increase_both_speeds,   
 
             # Decrease BOTH linear and angular speeds
             'e': self._decrease_both_speeds,
-            '-': self._decrease_both_speeds,   # Numpad -
+            '-': self._decrease_both_speeds,   
 
             # Increase ONLY linear speed
             'q': self._increase_linear_speed,
+            '/': self._increase_linear_speed,
 
             # Decrease ONLY linear speed (changed behavior for 'r')
             'r': self._decrease_linear_speed,
+            '*': self._decrease_linear_speed,
         }
 
 
@@ -181,32 +183,32 @@ class RobotLegionTeleop(Node):
         """
         Print a help banner explaining all keys and the current speed scales.
         """
-        print("-----------------------------------------------------------")
+        print("--------------------------------------------------")
         print(" Robot Legion Teleop (Python)")
-        print("-----------------------------------------------------------")
+        print("--------------------------------------------------")
         print("Publishing to Twist topic: {}".format(topic_name))
         print("")
         print("MOTION KEYS:")
-        print("  Arrow Up        : move forward")
-        print("  Arrow Down      : move backward")
-        print("  Arrow Left      : rotate left in place")
-        print("  Arrow Right     : rotate right in place")
+        print("  [UP]    : move forward")
+        print("  [DOWN]  : move backward")
+        print("  [LEFT]  : rotate left in place")
+        print("  [RIGHT] : rotate right in place")
         print("")
-        print("  a               : forward + left")
-        print("  d               : forward + right")
-        print("  <               : backward + right")
-        print("  c               : backward + left")
+        print("  a       : forward + left")
+        print("  d       : forward + right")
+        print("  <       : backward + right")
+        print("  c       : backward + left")
         print("")
-        print("  SPACE           : stop (zero linear and angular)")
+        print("  [SPACE] : stop (zero linear and angular)")
         print("")
         print("SPEED CONTROL:")
-        print("  w               : increase BOTH linear and angular speeds")
-        print("  e               : decrease BOTH linear and angular speeds")
-        print("  q               : increase ONLY linear speed")
-        print("  r               : decrease ONLY linear speed")
+        print("  w       : increase linear + angular speed")
+        print("  e       : decrease linear + angular speed")
+        print("  q       : increase linear speed")
+        print("  r       : decrease linear speed")
         print("")
         print("CTRL-C to quit.")
-        print("-----------------------------------------------------------")
+        print("--------------------------------------------------")
         self._print_current_speeds()
 
     def _print_current_speeds(self):
@@ -288,7 +290,7 @@ class RobotLegionTeleop(Node):
 
                 # Stop key: space bar
                 # Stop keys: space bar or numpad 5
-                elif key in (' ', '5'):
+                elif key in (' ', '5', 's'):
                     twist = Twist()
                     # All fields default to zero, but we set explicitly for clarity
                     twist.linear.x = 0.0
