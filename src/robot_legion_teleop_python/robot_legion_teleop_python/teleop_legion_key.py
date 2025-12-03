@@ -114,6 +114,12 @@ class RobotLegionTeleop(Node):
         # The scale factors that get multiplied/divided when we press speed keys
         self.speed_step = 1.1  # 10% increments
 
+        # Remember the last commanded direction (multipliers) so that
+        # speed changes can take effect immediately while moving.
+        self.last_lin_mult = 0.0
+        self.last_ang_mult = 0.0
+        self.is_moving = False
+
         # Create the movement mapping.
         # Each key maps to a pair: (linear_x_multiplier, angular_z_multiplier)
         #
@@ -215,9 +221,35 @@ class RobotLegionTeleop(Node):
         """
         Print the current linear and angular speed scales.
         """
-        print("Current speeds -> linear: {:.3f}  angular: {:.3f}".format(
+        print("Linear Speed: {:.3f}  Angular Speed: {:.3f}".format(
             self.linear_speed, self.angular_speed
         ))
+
+    def _republish_last_twist(self):
+        """
+        Re-publish the last commanded direction using the *current* speed scales.
+
+        This is used so that speed changes (w/e/q/r, numpad +/- etc.)
+        take effect immediately while the robot is already moving.
+        """
+        if not self.is_moving:
+            return
+
+        # If both multipliers are zero, there is nothing meaningful to send.
+        if self.last_lin_mult == 0.0 and self.last_ang_mult == 0.0:
+            return
+
+        twist = Twist()
+        twist.linear.x = self.linear_speed * self.last_lin_mult
+        twist.linear.y = 0.0
+        twist.linear.z = 0.0
+
+        twist.angular.x = 0.0
+        twist.angular.y = 0.0
+        twist.angular.z = self.angular_speed * self.last_ang_mult
+
+        self.publisher_.publish(twist)
+
 
     # ----------------------------------------------------------------------
     # Speed scaling methods (called from speed_bindings)
@@ -228,22 +260,28 @@ class RobotLegionTeleop(Node):
         self.angular_speed *= self.speed_step
         print("[w] Increased BOTH speeds by {:.0f}%".format((self.speed_step - 1.0) * 100.0))
         self._print_current_speeds()
+        self._republish_last_twist()
+
 
     def _decrease_both_speeds(self):
         self.linear_speed /= self.speed_step
         self.angular_speed /= self.speed_step
         print("[e] Decreased BOTH speeds by {:.0f}%".format((self.speed_step - 1.0) * 100.0))
         self._print_current_speeds()
+        self._republish_last_twist()
 
     def _increase_linear_speed(self):
         self.linear_speed *= self.speed_step
         print("[q] Increased LINEAR speed by {:.0f}%".format((self.speed_step - 1.0) * 100.0))
         self._print_current_speeds()
+        self._republish_last_twist()
 
     def _decrease_linear_speed(self):
         self.linear_speed /= self.speed_step
         print("[r] Decreased LINEAR speed by {:.0f}%".format((self.speed_step - 1.0) * 100.0))
         self._print_current_speeds()
+        self._republish_last_twist()
+
 
 
     # ----------------------------------------------------------------------
@@ -273,9 +311,14 @@ class RobotLegionTeleop(Node):
                 if key == '\x03':
                     break
 
-                # Check if this is a movement key
+                                # Check if this is a movement key
                 if key in self.move_bindings:
                     lin_mult, ang_mult = self.move_bindings[key]
+
+                    # Remember the last direction so speed changes can reuse it
+                    self.last_lin_mult = lin_mult
+                    self.last_ang_mult = ang_mult
+                    self.is_moving = True
 
                     twist = Twist()
                     twist.linear.x = self.linear_speed * lin_mult
@@ -288,8 +331,6 @@ class RobotLegionTeleop(Node):
 
                     self.publisher_.publish(twist)
 
-                # Stop key: space bar
-                # Stop keys: space bar or numpad 5
                 elif key in (' ', '5', 's'):
                     twist = Twist()
                     # All fields default to zero, but we set explicitly for clarity
@@ -303,6 +344,10 @@ class RobotLegionTeleop(Node):
                     print("[STOP] Stop command issued (key: {!r}).".format(key))
                     self.publisher_.publish(twist)
 
+                    # Mark that we are no longer moving
+                    self.is_moving = False
+                    self.last_lin_mult = 0.0
+                    self.last_ang_mult = 0.0
 
                 # Speed adjustment keys
                 elif key in self.speed_bindings:
