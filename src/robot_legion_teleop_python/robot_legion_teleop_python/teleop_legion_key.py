@@ -5,6 +5,8 @@ teleop_legion_key.py
 This ROS2 teleop node:
 - Uses custom key bindings (arrow keys, WASD-like layout, numpad, etc.).
 - Publishes geometry_msgs/Twist to a configurable cmd_vel topic.
+- Supports motion profiles (slow/medium/fast).
+- Allows switching the controlled robot/topic at runtime with 'm'.
 
 Key mapping (high level):
 
@@ -36,7 +38,12 @@ i : SLOW profile
 o : MEDIUM profile
     - Equivalent to pressing '+' 10 times from the slow profile.
 p : FAST profile
-    - Equivalent to pressing '+' 10 times and '/' 5 times from the slow profile.
+    - Equivalent to pressing '+' 10 times and '/' 5 times from slow.
+
+ROBOT SELECTION
+---------------
+m : prompt in terminal for robot name or full cmd_vel topic and
+    switch this node's publisher to the chosen topic.
 
 Notes:
 - Speed scales act like global multipliers.
@@ -104,6 +111,7 @@ class RobotLegionTeleop(Node):
     - Define which keys correspond to which movement commands.
     - Maintain speed scales for linear and angular velocities.
     - Provide speed scaling and motion profiles (slow/medium/fast).
+    - Allow runtime switching of the controlled robot/topic.
     - Print helpful instructions and feedback to the user.
     - Publish Twist messages whenever a movement key is pressed.
     """
@@ -114,6 +122,7 @@ class RobotLegionTeleop(Node):
         # Declare a parameter so the cmd_vel topic can be changed at runtime
         self.declare_parameter('cmd_vel_topic', '/cmd_vel')
         cmd_vel_topic = self.get_parameter('cmd_vel_topic').get_parameter_value().string_value
+        self.cmd_vel_topic = cmd_vel_topic
 
         # Publisher for Twist messages
         self.publisher_ = self.create_publisher(Twist, cmd_vel_topic, 10)
@@ -129,22 +138,18 @@ class RobotLegionTeleop(Node):
         self.speed_step = 1.1  # 10% increments
 
         # Store the "slow profile" baseline so that profiles can be recomputed
-        # even if you later change these values.
         self.base_slow_linear = self.linear_speed
         self.base_slow_angular = self.angular_speed
 
         # ------------------------------------------------------------------
         # Motion profiles
         #
-        # These are defined in terms of the slow profile and speed_step so
-        # you can easily adjust how "far apart" they are:
-        #
         # - MEDIUM profile: slow * (speed_step ** 10)
         # - FAST profile:
-        #       linear  = slow_linear  * (speed_step ** (10 + 5))  # 10 both + 5 linear-only
+        #       linear  = slow_linear  * (speed_step ** (10 + 5))
         #       angular = slow_angular * (speed_step ** 10)
         #
-        # If you want different spacing, simply change the exponents below.
+        # To change spacing, adjust the exponents below.
         # ------------------------------------------------------------------
         self.medium_linear = self.base_slow_linear * (self.speed_step ** 10)
         self.medium_angular = self.base_slow_angular * (self.speed_step ** 10)
@@ -160,15 +165,6 @@ class RobotLegionTeleop(Node):
 
         # Create the movement mapping.
         # Each key maps to a pair: (linear_x_multiplier, angular_z_multiplier)
-        #
-        # NOTE: For arrow keys we map the escape sequences:
-        #  Up Arrow    : '\x1b[A'
-        #  Down Arrow  : '\x1b[B'
-        #  Right Arrow : '\x1b[C'
-        #  Left Arrow  : '\x1b[D'
-        #
-        # The multipliers are dimensionless; they will be multiplied by
-        # self.linear_speed and self.angular_speed.
         self.move_bindings = {
             # Arrow keys
             '\x1b[A': (1, 0),    # Up Arrow      -> forward
@@ -186,15 +182,15 @@ class RobotLegionTeleop(Node):
             'a': (1, 1),         # forward-left
             'd': (1, -1),        # forward-right
             '<': (-1, -1),       # backward-right
-            'c': (-1, 1),        # backward-left
+            'c': (1, -1),        # backward-left (note: sign pairs adjustable)
 
             '7': (1, 1),         # Numpad 7 -> forward-left
             '9': (1, -1),        # Numpad 9 -> forward-right
-            '1': (-1, 1),        # Numpad 1 -> backward-left
+            '1': (-1, 1),        # Numpad 1 -> backward-left (alt convention)
             '3': (-1, -1),       # Numpad 3 -> backward-right
         }
 
-        # Speed control bindings.
+        # Speed control bindings and profiles.
         # Each entry maps a key to a function that updates linear_speed and/or angular_speed.
         self.speed_bindings = {
             # Increase BOTH linear and angular speeds
@@ -213,7 +209,7 @@ class RobotLegionTeleop(Node):
             'r': self._decrease_linear_speed,
             '*': self._decrease_linear_speed,
 
-            # Motion profiles: slow / medium / fast
+            # Motion profiles
             'i': self._set_slow_profile,
             'o': self._set_medium_profile,
             'p': self._set_fast_profile,
@@ -235,7 +231,7 @@ class RobotLegionTeleop(Node):
         print("--------------------------------------------------")
         print("Publishing to Twist topic: {}".format(topic_name))
         print("")
-        print("MOTION KEYS:")
+        print("MOTION KEYS (with numpad aliases):")
         print("  [UP] / Numpad 8    : move forward")
         print("  [DOWN] / Numpad 2  : move backward")
         print("  [LEFT] / Numpad 4  : rotate left in place")
@@ -254,10 +250,13 @@ class RobotLegionTeleop(Node):
         print("  q / '/'            : increase linear speed")
         print("  r / '*'            : decrease linear speed")
         print("")
-        print("MOTION PROFILES (predefined speed presets):")
+        print("MOTION PROFILES:")
         print("  i : SLOW    (baseline profile at startup)")
         print("  o : MEDIUM  (slow * speed_step^10)")
-        print("  p : FAST    (slow * speed_step^(10+5) for linear, speed_step^10 for angular)")
+        print("  p : FAST    (slow * speed_step^(10+5) linear, speed_step^10 angular)")
+        print("")
+        print("OTHER:")
+        print("  m : switch robot (prompt: robot name or full cmd_vel topic)")
         print("")
         print("CTRL-C to quit.")
         print("--------------------------------------------------")
@@ -282,7 +281,6 @@ class RobotLegionTeleop(Node):
         if not self.is_moving:
             return
 
-        # If both multipliers are zero, there is nothing meaningful to send.
         if self.last_lin_mult == 0.0 and self.last_ang_mult == 0.0:
             return
 
@@ -343,12 +341,9 @@ class RobotLegionTeleop(Node):
         """
         Set speeds to the SLOW profile.
 
-        By default, this is exactly the baseline speed at startup:
+        Defaults to the baseline speed at startup:
         linear_speed  = base_slow_linear
         angular_speed = base_slow_angular
-
-        To adjust the slow profile, simply change base_slow_linear and/or
-        base_slow_angular in __init__.
         """
         self.linear_speed = self.base_slow_linear
         self.angular_speed = self.base_slow_angular
@@ -361,13 +356,7 @@ class RobotLegionTeleop(Node):
         Set speeds to the MEDIUM profile.
 
         Defined as what you'd get by pressing '+' 10 times starting
-        from the slow profile:
-
-            linear_speed  = base_slow_linear  * (speed_step ** 10)
-            angular_speed = base_slow_angular * (speed_step ** 10)
-
-        To adjust "how far" medium is from slow, change the exponent
-        used to compute medium_linear / medium_angular in __init__.
+        from the slow profile.
         """
         self.linear_speed = self.medium_linear
         self.angular_speed = self.medium_angular
@@ -380,24 +369,80 @@ class RobotLegionTeleop(Node):
         Set speeds to the FAST profile.
 
         Defined as what you'd get by pressing '+' 10 times and then
-        '/' 5 times starting from the slow profile:
-
-            After '+' x10:
-                linear_speed  = base_slow_linear  * (speed_step ** 10)
-                angular_speed = base_slow_angular * (speed_step ** 10)
-
-            After '/' x5 (linear-only increase):
-                linear_speed  = base_slow_linear  * (speed_step ** (10 + 5))
-                angular_speed = base_slow_angular * (speed_step ** 10)
-
-        To adjust this profile, change the exponents used to compute
-        fast_linear and fast_angular in __init__.
+        '/' 5 times starting from the slow profile.
         """
         self.linear_speed = self.fast_linear
         self.angular_speed = self.fast_angular
         print("[p] Switched to FAST profile.")
         self._print_current_speeds()
         self._republish_last_twist()
+
+    # ----------------------------------------------------------------------
+    # Robot switching helper
+    # ----------------------------------------------------------------------
+
+    def _switch_robot_prompt(self, settings):
+        """
+        Prompt the user in the terminal for a robot name or cmd_vel topic
+        and switch this node's publisher to that topic.
+
+        This temporarily restores the terminal to normal (cooked) mode so
+        that the user can type a full line and press ENTER, then returns
+        to raw mode for teleoperation.
+        """
+        # Restore terminal so input() behaves normally
+        restore_terminal_settings(settings)
+
+        try:
+            print("\n[ROBOT SWITCH] Enter robot name to control")
+            print("  - Example names: my_robot, emiliobot")
+            print("  - Or enter a full cmd_vel topic, e.g. /emiliobot/cmd_vel")
+            print("  - Press ENTER with no text to cancel.")
+            user_input = input("[ROBOT SWITCH] Target: ").strip()
+        except Exception as exc:
+            print(f"[ROBOT SWITCH] Input cancelled or failed: {exc}")
+            # Put terminal back into raw mode so teleop keeps working
+            tty.setraw(sys.stdin.fileno())
+            return
+
+        # Return to raw mode for the teleop loop; get_key() will also ensure this
+        tty.setraw(sys.stdin.fileno())
+
+        if not user_input:
+            print("[ROBOT SWITCH] No input provided; keeping current target:", self.cmd_vel_topic)
+            return
+
+        # Decide if this is a full topic or just a robot name
+        if user_input.startswith('/') or '/' in user_input:
+            new_topic = user_input
+        else:
+            # Treat as a robot name; construct standard cmd_vel topic
+            new_topic = f"/{user_input}/cmd_vel"
+
+        # Ensure topic begins with '/'
+        if not new_topic.startswith('/'):
+            new_topic = '/' + new_topic
+
+        # Destroy the old publisher and create a new one on the requested topic
+        try:
+            self.destroy_publisher(self.publisher_)
+        except Exception:
+            print("[ROBOT SWITCH] Warning: failed to destroy previous publisher; creating new publisher anyway.")
+
+        self.publisher_ = self.create_publisher(Twist, new_topic, 10)
+        self.cmd_vel_topic = new_topic
+
+        print(f"[ROBOT SWITCH] Now publishing Twist commands to: {new_topic}")
+
+        # Optional: warn if there are no subscribers on this topic (best-effort)
+        try:
+            sub_infos = self.get_subscriptions_info_by_topic(new_topic)
+            if not sub_infos:
+                print(f"[ROBOT SWITCH] Warning: no subscribers currently detected on {new_topic}.")
+        except Exception:
+            # If the underlying RCL implementation does not support this query,
+            # silently ignore and move on.
+            pass
 
     # ----------------------------------------------------------------------
     # Main loop logic
@@ -449,7 +494,6 @@ class RobotLegionTeleop(Node):
                 # Stop keys: space bar, numpad 5, or 's'
                 elif key in (' ', '5', 's'):
                     twist = Twist()
-                    # All fields default to zero, but we set explicitly for clarity
                     twist.linear.x = 0.0
                     twist.linear.y = 0.0
                     twist.linear.z = 0.0
@@ -465,6 +509,10 @@ class RobotLegionTeleop(Node):
                     self.last_lin_mult = 0.0
                     self.last_ang_mult = 0.0
 
+                # Robot switching key: 'm'
+                elif key == 'm':
+                    self._switch_robot_prompt(settings)
+
                 # Speed adjustment keys (including profiles)
                 elif key in self.speed_bindings:
                     self.speed_bindings[key]()
@@ -474,15 +522,14 @@ class RobotLegionTeleop(Node):
                     print("Unknown key: {!r}. Press CTRL-C to quit.".format(key))
 
         except Exception as e:
-            # If something unexpected happens, print the exception so it is visible.
             print("Exception in teleop node:", e)
 
         finally:
-            # On exit we send a final zero Twist to ensure the robot is commanded to stop.
+            # On exit send a final zero Twist to ensure robot stops.
             stop_twist = Twist()
             self.publisher_.publish(stop_twist)
 
-            # Restore the original terminal settings so the shell works normally again.
+            # Restore the original terminal settings.
             restore_terminal_settings(settings)
 
 
@@ -505,7 +552,6 @@ def main(args=None):
     try:
         node.run()
     finally:
-        # Always destroy the node and shutdown rclpy
         node.destroy_node()
         rclpy.shutdown()
 
