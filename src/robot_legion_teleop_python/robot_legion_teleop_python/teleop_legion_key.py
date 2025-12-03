@@ -3,35 +3,45 @@
 teleop_legion_key.py
 
 This ROS2 teleop node:
-- Uses custom key bindings (arrow keys, WASD-like layout, etc.).
+- Uses custom key bindings (arrow keys, WASD-like layout, numpad, etc.).
 - Publishes geometry_msgs/Twist to a configurable cmd_vel topic.
 
-Key mapping:
+Key mapping (high level):
 
 MOVEMENT (Twist linear.x / angular.z)
 ------------------------------------
-Up Arrow      : forward            ( +linear,  0 angular)
-Down Arrow    : backward           ( -linear,  0 angular)
-Left Arrow    : rotate left        ( 0 linear, +angular)
-Right Arrow   : rotate right       ( 0 linear, -angular)
+Up Arrow / Numpad 8 : forward            ( +linear,  0 angular)
+Down Arrow / Numpad 2 : backward         ( -linear,  0 angular)
+Left Arrow / Numpad 4 : rotate left      ( 0 linear, +angular)
+Right Arrow / Numpad 6 : rotate right    ( 0 linear, -angular)
 
-a             : forward + left     ( +linear, +angular)
-d             : forward + right    ( +linear, -angular)
-<             : backward + right   ( -linear, -angular)
-c             : backward + left    ( -linear, +angular)
+a / Numpad 7         : forward + left    ( +linear, +angular)
+d / Numpad 9         : forward + right   ( +linear, -angular)
+< / Numpad 3         : backward + right  ( -linear, -angular)
+c / Numpad 1         : backward + left   ( -linear, +angular)
 
-Space         : stop (all velocities = 0)
+Space / Numpad 5 / s : stop (all velocities = 0)
 
-SPEED CONTROL (scales, not immediate motion)
---------------------------------------------
-w             : increase BOTH linear and angular speed 
-e             : decrease BOTH linear and angular speed 
-q             : increase ONLY linear speed scale
-r             : decrease ONLY linear speed scale
+SPEED CONTROL (scales, not immediate motion by themselves)
+----------------------------------------------------------
+w / Numpad +         : increase BOTH linear and angular speed 
+e / Numpad -         : decrease BOTH linear and angular speed 
+q / '/'              : increase ONLY linear speed scale
+r / '*'              : decrease ONLY linear speed scale
+
+MOTION PROFILES (predefined speed presets)
+------------------------------------------
+i : SLOW profile
+    - The baseline speed the node starts with.
+o : MEDIUM profile
+    - Equivalent to pressing '+' 10 times from the slow profile.
+p : FAST profile
+    - Equivalent to pressing '+' 10 times and '/' 5 times from the slow profile.
 
 Notes:
 - Speed scales act like global multipliers.
 - The node prints the current speed scales in the terminal.
+- Speed and profile changes take effect immediately while moving.
 """
 
 import sys
@@ -93,6 +103,7 @@ class RobotLegionTeleop(Node):
     Main responsibilities:
     - Define which keys correspond to which movement commands.
     - Maintain speed scales for linear and angular velocities.
+    - Provide speed scaling and motion profiles (slow/medium/fast).
     - Print helpful instructions and feedback to the user.
     - Publish Twist messages whenever a movement key is pressed.
     """
@@ -107,15 +118,42 @@ class RobotLegionTeleop(Node):
         # Publisher for Twist messages
         self.publisher_ = self.create_publisher(Twist, cmd_vel_topic, 10)
 
-        # Initial speed scales (these can be tuned to your liking)
-        self.linear_speed = 0.5   # meters per second
-        self.angular_speed = 1.0  # radians per second
+        # ------------------------------------------------------------------
+        # Base speed scales (these define your SLOW profile)
+        # ------------------------------------------------------------------
+        self.linear_speed = 0.5   # meters per second (slow profile baseline)
+        self.angular_speed = 1.0  # radians per second (slow profile baseline)
 
-        # The scale factors that get multiplied/divided when we press speed keys
+        # The scale factor used when pressing w/e/q/r, +, -, /, *
+        # Each press multiplies/divides speed by this factor.
         self.speed_step = 1.1  # 10% increments
 
+        # Store the "slow profile" baseline so that profiles can be recomputed
+        # even if you later change these values.
+        self.base_slow_linear = self.linear_speed
+        self.base_slow_angular = self.angular_speed
+
+        # ------------------------------------------------------------------
+        # Motion profiles
+        #
+        # These are defined in terms of the slow profile and speed_step so
+        # you can easily adjust how "far apart" they are:
+        #
+        # - MEDIUM profile: slow * (speed_step ** 10)
+        # - FAST profile:
+        #       linear  = slow_linear  * (speed_step ** (10 + 5))  # 10 both + 5 linear-only
+        #       angular = slow_angular * (speed_step ** 10)
+        #
+        # If you want different spacing, simply change the exponents below.
+        # ------------------------------------------------------------------
+        self.medium_linear = self.base_slow_linear * (self.speed_step ** 10)
+        self.medium_angular = self.base_slow_angular * (self.speed_step ** 10)
+
+        self.fast_linear = self.base_slow_linear * (self.speed_step ** 15)
+        self.fast_angular = self.base_slow_angular * (self.speed_step ** 10)
+
         # Remember the last commanded direction (multipliers) so that
-        # speed changes can take effect immediately while moving.
+        # speed changes and profile changes can take effect immediately while moving.
         self.last_lin_mult = 0.0
         self.last_ang_mult = 0.0
         self.is_moving = False
@@ -156,27 +194,30 @@ class RobotLegionTeleop(Node):
             '3': (-1, -1),       # Numpad 3 -> backward-right
         }
 
-
         # Speed control bindings.
         # Each entry maps a key to a function that updates linear_speed and/or angular_speed.
         self.speed_bindings = {
             # Increase BOTH linear and angular speeds
             'w': self._increase_both_speeds,
-            '+': self._increase_both_speeds,   
+            '+': self._increase_both_speeds,   # Numpad +
 
             # Decrease BOTH linear and angular speeds
             'e': self._decrease_both_speeds,
-            '-': self._decrease_both_speeds,   
+            '-': self._decrease_both_speeds,   # Numpad -
 
             # Increase ONLY linear speed
             'q': self._increase_linear_speed,
             '/': self._increase_linear_speed,
 
-            # Decrease ONLY linear speed (changed behavior for 'r')
+            # Decrease ONLY linear speed
             'r': self._decrease_linear_speed,
             '*': self._decrease_linear_speed,
-        }
 
+            # Motion profiles: slow / medium / fast
+            'i': self._set_slow_profile,
+            'o': self._set_medium_profile,
+            'p': self._set_fast_profile,
+        }
 
         # Print detailed instructions once at startup
         self._print_instructions(cmd_vel_topic)
@@ -195,23 +236,28 @@ class RobotLegionTeleop(Node):
         print("Publishing to Twist topic: {}".format(topic_name))
         print("")
         print("MOTION KEYS:")
-        print("  [UP]    : move forward")
-        print("  [DOWN]  : move backward")
-        print("  [LEFT]  : rotate left in place")
-        print("  [RIGHT] : rotate right in place")
+        print("  [UP] / Numpad 8    : move forward")
+        print("  [DOWN] / Numpad 2  : move backward")
+        print("  [LEFT] / Numpad 4  : rotate left in place")
+        print("  [RIGHT] / Numpad 6 : rotate right in place")
         print("")
-        print("  a       : forward + left")
-        print("  d       : forward + right")
-        print("  <       : backward + right")
-        print("  c       : backward + left")
+        print("  a / Numpad 7       : forward + left")
+        print("  d / Numpad 9       : forward + right")
+        print("  < / Numpad 3       : backward + right")
+        print("  c / Numpad 1       : backward + left")
         print("")
-        print("  [SPACE] : stop (zero linear and angular)")
+        print("  [SPACE] / Numpad 5 / s : stop (zero linear and angular)")
         print("")
         print("SPEED CONTROL:")
-        print("  w       : increase linear + angular speed")
-        print("  e       : decrease linear + angular speed")
-        print("  q       : increase linear speed")
-        print("  r       : decrease linear speed")
+        print("  w / Numpad +       : increase linear + angular speed")
+        print("  e / Numpad -       : decrease linear + angular speed")
+        print("  q / '/'            : increase linear speed")
+        print("  r / '*'            : decrease linear speed")
+        print("")
+        print("MOTION PROFILES (predefined speed presets):")
+        print("  i : SLOW    (baseline profile at startup)")
+        print("  o : MEDIUM  (slow * speed_step^10)")
+        print("  p : FAST    (slow * speed_step^(10+5) for linear, speed_step^10 for angular)")
         print("")
         print("CTRL-C to quit.")
         print("--------------------------------------------------")
@@ -230,7 +276,8 @@ class RobotLegionTeleop(Node):
         Re-publish the last commanded direction using the *current* speed scales.
 
         This is used so that speed changes (w/e/q/r, numpad +/- etc.)
-        take effect immediately while the robot is already moving.
+        and profile changes (i/o/p) take effect immediately while the
+        robot is already moving.
         """
         if not self.is_moving:
             return
@@ -250,7 +297,6 @@ class RobotLegionTeleop(Node):
 
         self.publisher_.publish(twist)
 
-
     # ----------------------------------------------------------------------
     # Speed scaling methods (called from speed_bindings)
     # ----------------------------------------------------------------------
@@ -258,31 +304,100 @@ class RobotLegionTeleop(Node):
     def _increase_both_speeds(self):
         self.linear_speed *= self.speed_step
         self.angular_speed *= self.speed_step
-        print("[w] Increased BOTH speeds by {:.0f}%".format((self.speed_step - 1.0) * 100.0))
+        print("[w / +] Increased BOTH speeds by {:.0f}%".format(
+            (self.speed_step - 1.0) * 100.0
+        ))
         self._print_current_speeds()
         self._republish_last_twist()
-
 
     def _decrease_both_speeds(self):
         self.linear_speed /= self.speed_step
         self.angular_speed /= self.speed_step
-        print("[e] Decreased BOTH speeds by {:.0f}%".format((self.speed_step - 1.0) * 100.0))
+        print("[e / -] Decreased BOTH speeds by {:.0f}%".format(
+            (self.speed_step - 1.0) * 100.0
+        ))
         self._print_current_speeds()
         self._republish_last_twist()
 
     def _increase_linear_speed(self):
         self.linear_speed *= self.speed_step
-        print("[q] Increased LINEAR speed by {:.0f}%".format((self.speed_step - 1.0) * 100.0))
+        print("[q / '/'] Increased LINEAR speed by {:.0f}%".format(
+            (self.speed_step - 1.0) * 100.0
+        ))
         self._print_current_speeds()
         self._republish_last_twist()
 
     def _decrease_linear_speed(self):
         self.linear_speed /= self.speed_step
-        print("[r] Decreased LINEAR speed by {:.0f}%".format((self.speed_step - 1.0) * 100.0))
+        print("[r / '*'] Decreased LINEAR speed by {:.0f}%".format(
+            (self.speed_step - 1.0) * 100.0
+        ))
         self._print_current_speeds()
         self._republish_last_twist()
 
+    # ----------------------------------------------------------------------
+    # Motion profile methods (slow / medium / fast)
+    # ----------------------------------------------------------------------
 
+    def _set_slow_profile(self):
+        """
+        Set speeds to the SLOW profile.
+
+        By default, this is exactly the baseline speed at startup:
+        linear_speed  = base_slow_linear
+        angular_speed = base_slow_angular
+
+        To adjust the slow profile, simply change base_slow_linear and/or
+        base_slow_angular in __init__.
+        """
+        self.linear_speed = self.base_slow_linear
+        self.angular_speed = self.base_slow_angular
+        print("[i] Switched to SLOW profile.")
+        self._print_current_speeds()
+        self._republish_last_twist()
+
+    def _set_medium_profile(self):
+        """
+        Set speeds to the MEDIUM profile.
+
+        Defined as what you'd get by pressing '+' 10 times starting
+        from the slow profile:
+
+            linear_speed  = base_slow_linear  * (speed_step ** 10)
+            angular_speed = base_slow_angular * (speed_step ** 10)
+
+        To adjust "how far" medium is from slow, change the exponent
+        used to compute medium_linear / medium_angular in __init__.
+        """
+        self.linear_speed = self.medium_linear
+        self.angular_speed = self.medium_angular
+        print("[o] Switched to MEDIUM profile.")
+        self._print_current_speeds()
+        self._republish_last_twist()
+
+    def _set_fast_profile(self):
+        """
+        Set speeds to the FAST profile.
+
+        Defined as what you'd get by pressing '+' 10 times and then
+        '/' 5 times starting from the slow profile:
+
+            After '+' x10:
+                linear_speed  = base_slow_linear  * (speed_step ** 10)
+                angular_speed = base_slow_angular * (speed_step ** 10)
+
+            After '/' x5 (linear-only increase):
+                linear_speed  = base_slow_linear  * (speed_step ** (10 + 5))
+                angular_speed = base_slow_angular * (speed_step ** 10)
+
+        To adjust this profile, change the exponents used to compute
+        fast_linear and fast_angular in __init__.
+        """
+        self.linear_speed = self.fast_linear
+        self.angular_speed = self.fast_angular
+        print("[p] Switched to FAST profile.")
+        self._print_current_speeds()
+        self._republish_last_twist()
 
     # ----------------------------------------------------------------------
     # Main loop logic
@@ -311,7 +426,7 @@ class RobotLegionTeleop(Node):
                 if key == '\x03':
                     break
 
-                                # Check if this is a movement key
+                # Check if this is a movement key
                 if key in self.move_bindings:
                     lin_mult, ang_mult = self.move_bindings[key]
 
@@ -331,6 +446,7 @@ class RobotLegionTeleop(Node):
 
                     self.publisher_.publish(twist)
 
+                # Stop keys: space bar, numpad 5, or 's'
                 elif key in (' ', '5', 's'):
                     twist = Twist()
                     # All fields default to zero, but we set explicitly for clarity
@@ -349,7 +465,7 @@ class RobotLegionTeleop(Node):
                     self.last_lin_mult = 0.0
                     self.last_ang_mult = 0.0
 
-                # Speed adjustment keys
+                # Speed adjustment keys (including profiles)
                 elif key in self.speed_bindings:
                     self.speed_bindings[key]()
 
