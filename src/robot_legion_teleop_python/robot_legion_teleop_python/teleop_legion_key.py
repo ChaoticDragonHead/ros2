@@ -126,32 +126,49 @@ class RobotLegionTeleop(Node):
         # The multipliers are dimensionless; they will be multiplied by
         # self.linear_speed and self.angular_speed.
         self.move_bindings = {
+            # Arrow keys
             '\x1b[A': (1, 0),    # Up Arrow      -> forward
             '\x1b[B': (-1, 0),   # Down Arrow    -> backward
             '\x1b[D': (0, 1),    # Left Arrow    -> rotate left
             '\x1b[C': (0, -1),   # Right Arrow   -> rotate right
 
+            # Numpad cardinal directions (NumLock ON)
+            '8': (1, 0),         # Numpad 8 -> forward
+            '2': (-1, 0),        # Numpad 2 -> backward
+            '4': (0, 1),         # Numpad 4 -> rotate left
+            '6': (0, -1),        # Numpad 6 -> rotate right
+
+            # Diagonals: letters and numpad
             'a': (1, 1),         # forward-left
             'd': (1, -1),        # forward-right
             '<': (-1, -1),       # backward-right
             'c': (-1, 1),        # backward-left
+
+            '7': (1, 1),         # Numpad 7 -> forward-left
+            '9': (1, -1),        # Numpad 9 -> forward-right
+            '1': (-1, 1),        # Numpad 1 -> backward-left
+            '3': (-1, -1),       # Numpad 3 -> backward-right
         }
+
 
         # Speed control bindings.
         # Each entry maps a key to a function that updates linear_speed and/or angular_speed.
         self.speed_bindings = {
             # Increase BOTH linear and angular speeds
             'w': self._increase_both_speeds,
+            '+': self._increase_both_speeds,   # Numpad +
 
             # Decrease BOTH linear and angular speeds
             'e': self._decrease_both_speeds,
+            '-': self._decrease_both_speeds,   # Numpad -
 
             # Increase ONLY linear speed
             'q': self._increase_linear_speed,
 
-            # Increase ONLY angular speed
-            'r': self._increase_angular_speed,
+            # Decrease ONLY linear speed (changed behavior for 'r')
+            'r': self._decrease_linear_speed,
         }
+
 
         # Print detailed instructions once at startup
         self._print_instructions(cmd_vel_topic)
@@ -186,7 +203,7 @@ class RobotLegionTeleop(Node):
         print("  w               : increase BOTH linear and angular speeds")
         print("  e               : decrease BOTH linear and angular speeds")
         print("  q               : increase ONLY linear speed")
-        print("  r               : increase ONLY angular speed")
+        print("  r               : decrease ONLY linear speed")
         print("")
         print("CTRL-C to quit.")
         print("-----------------------------------------------------------")
@@ -221,10 +238,11 @@ class RobotLegionTeleop(Node):
         print("[q] Increased LINEAR speed by {:.0f}%".format((self.speed_step - 1.0) * 100.0))
         self._print_current_speeds()
 
-    def _increase_angular_speed(self):
-        self.angular_speed *= self.speed_step
-        print("[r] Increased ANGULAR speed by {:.0f}%".format((self.speed_step - 1.0) * 100.0))
+    def _decrease_linear_speed(self):
+        self.linear_speed /= self.speed_step
+        print("[r] Decreased LINEAR speed by {:.0f}%".format((self.speed_step - 1.0) * 100.0))
         self._print_current_speeds()
+
 
     # ----------------------------------------------------------------------
     # Main loop logic
@@ -269,7 +287,8 @@ class RobotLegionTeleop(Node):
                     self.publisher_.publish(twist)
 
                 # Stop key: space bar
-                elif key == ' ':
+                # Stop keys: space bar or numpad 5
+                elif key in (' ', '5'):
                     twist = Twist()
                     # All fields default to zero, but we set explicitly for clarity
                     twist.linear.x = 0.0
@@ -279,8 +298,9 @@ class RobotLegionTeleop(Node):
                     twist.angular.y = 0.0
                     twist.angular.z = 0.0
 
-                    print("[SPACE] Stop command issued.")
+                    print("[STOP] Stop command issued (key: {!r}).".format(key))
                     self.publisher_.publish(twist)
+
 
                 # Speed adjustment keys
                 elif key in self.speed_bindings:
