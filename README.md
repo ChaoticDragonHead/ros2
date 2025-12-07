@@ -7,6 +7,7 @@
 ```shell
 git clone https://github.com/AEmilioDiStefano/ros2_ws.git
 ```
+<br>
 
 ## 1.  Create a GZ_SIM_SYSTEM_PLUGIN_PATH system variable
 
