@@ -88,16 +88,12 @@ export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RE
 
 ```shell
 source ~/.bashrc
+source install/setup.bash
 ```
-
-## Reload the Shell:
-
-```shell
-source ~/.bashrc
-```
+<br>
 
 ## Build and Execute Your Environment:
-### 1. Make sure you are in the correct folder (ros2_ws):
+## 1. Make sure you are in the correct folder (ros2_ws):
 ```shell
 cd ~/ros2_ws
 ```
@@ -105,14 +101,14 @@ cd ~/ros2_ws
 ```shell
 colcon build
 ```
-### 3. Execute
+## 3. Execute
 ```shell
 source ~/ros2_ws/install/setup.bash
 ```
 <br>
 
 ## Open RViz to show a visialization of your robot:
-### 1. Colcon Build and source to make sure any changes are reflected accurately: 
+## 1. Colcon Build and source to make sure any changes are reflected accurately: 
 ```shell
 cd ~/ros2_ws
 colcon build
@@ -127,19 +123,19 @@ ros2 launch urdf_tutorial display.launch.py model:=/home/aemilio/ros2_ws/src/my_
 <br>
 
 ## Open a Gazebo world with your robot within:
-### 1. Colcon Build and source to make sure any changes are reflected accurately: 
+## 1. Colcon Build and source to make sure any changes are reflected accurately: 
 ```shell
 cd ~/ros2_ws
 colcon build
 source install/setup.bash
 ```
-### 2. Run the launch file that opens our Gazebo world and spawns our robot within:
+## 2. Run the launch file that opens our Gazebo world and spawns our robot within:
 ```shell
 ros2 launch my_robot_bringup my_robot.launch.xml
 ```
 **Note**: This command will run a **launch file** called my_robot.urdf.xacro which sould already be in your repository.
 
-### 3. Run a control node to control a robot with teleop_twist_keyboard:
+## 3. Run a control node to control a robot with teleop_twist_keyboard:
 ```shell
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
@@ -148,25 +144,25 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 <br>
 
 ## Open a Gazebo world with the my_robot.urdf.xacro and another robot within (2 robots total):
-### 1. Colcon Build and source to make sure any changes are reflected accurately: 
+## 1. Colcon Build and source to make sure any changes are reflected accurately: 
 ```shell
 cd ~/ros2_ws
 colcon build
 source install/setup.bash
 ```
-### 2. Run our Python launch script that opens our Gazebo combat arena while spawning two robots within: one called my_robot and another called emiliobot: 
+## 2. Run our Python launch script that opens our Gazebo combat arena while spawning two robots within: one called my_robot and another called emiliobot: 
 ```shell
 ros2 launch my_robot_bringup two_robots_waterworld_xacro.launch.py
 ```
 **Note**: This command runs a **launch file** that opens a world called **waterworld.sdf** with **both** the robot defined in **my_robot.urdf.xacro** and the robot defined in **emiliobot.urdf.xacro**.
 
-### 3. Run a control node to control a robot with our own robot_legion_teleop_python package:
+## 3. Run a control node to control a robot with our own robot_legion_teleop_python package:
 ```shell
 ros2 run teleop_twist_keyboard teleop_twist_keyboard   --ros-args -r cmd_vel:=/emiliobot/cmd_vel
 ```
 **Note:** The above command will run a teleop node t control a robot called **emiliobit**.  In order to **run the teleop node to control another robot**, replace the name **emiliobot** in the above command with the name of your robot of chooice (for example, **my_robot**).
 
-###   
+##   
 ```shell
 ros2 run robot_legion_teleop_python legion_teleop_key   --ros-args -p cmd_vel_topic:=/emiliobot/cmd_vel
 ```
