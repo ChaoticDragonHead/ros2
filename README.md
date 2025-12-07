@@ -73,10 +73,11 @@ export GZ_SIM_SYSTEM_PLUGIN_PATH="/opt/ros/jazzy/lib:${GZ_SIM_SYSTEM_PLUGIN_PATH
 ```shell
 export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RESOURCE_PATH
 ```
-
-
-
-
+<br>
+<br>
+<br>
+<br>
+<br>
 
 # Important Commands
 
