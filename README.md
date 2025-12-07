@@ -145,7 +145,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 **Note:** In order to conmtrol the robot, **the terminal window running the teleop control node must be selected** rather than the Gazebo simulation window.
 
-
+<br>
 
 ## Open a Gazebo world with the my_robot.urdf.xacro and another robot within (2 robots total):
 ### 1. Colcon Build and source to make sure any changes are reflected accurately: 
@@ -160,18 +160,17 @@ ros2 launch my_robot_bringup two_robots_waterworld_xacro.launch.py
 ```
 **Note**: This command runs a **launch file** that opens a world called **waterworld.sdf** with **both** the robot defined in **my_robot.urdf.xacro** and the robot defined in **emiliobot.urdf.xacro**.
 
-### 3. Run a control node to control a robot:
+### 3. Run a control node to control a robot with our own robot_legion_teleop_python package:
 ```shell
 ros2 run teleop_twist_keyboard teleop_twist_keyboard   --ros-args -r cmd_vel:=/emiliobot/cmd_vel
 ```
 **Note:** The above command will run a teleop node t control a robot called **emiliobit**.  In order to **run the teleop node to control another robot**, replace the name **emiliobot** in the above command with the name of your robot of chooice (for example, **my_robot**).
 
-## OR
-###   Run a control node to control a robot with our own robot_legion_teleop_python package:
+###   
 ```shell
 ros2 run robot_legion_teleop_python legion_teleop_key   --ros-args -p cmd_vel_topic:=/emiliobot/cmd_vel
 ```
-**Note:** Replace **in this command** with **the name of the robot** that you woul dlike to **control**.
+**Note:** Replace **in this command** with **the name of the robot** that you would like to **control**.
 
 
 
