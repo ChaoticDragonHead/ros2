@@ -83,7 +83,6 @@ export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RE
 # Important Commands
 
 <br>
-<br>
 
 ## Reload the Shell:
 
@@ -111,7 +110,6 @@ colcon build
 source ~/ros2_ws/install/setup.bash
 ```
 <br>
-<br>
 
 ## Open RViz to show a visialization of your robot:
 ### 1. Colcon Build and source to make sure any changes are reflected accurately: 
@@ -126,7 +124,7 @@ ros2 launch urdf_tutorial display.launch.py model:=/home/aemilio/ros2_ws/src/my_
 ```
 **Note**: This command will open a XACRO file called my_robot.urdf.xacro which sould already be in your repository.
 
-
+<br>
 
 ## Open a Gazebo world with your robot within:
 ### 1. Colcon Build and source to make sure any changes are reflected accurately: 
