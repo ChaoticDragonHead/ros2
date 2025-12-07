@@ -2051,6 +2051,240 @@
       </link>
     </model>
 
+    <!--  
+   _    _ _____ _____  _____  ______ _   _   _      ________      ________ _        __ 
+  | |  | |_   _|  __ \|  __ \|  ____| \ | | | |    |  ____\ \    / /  ____| |      /_ |
+  | |__| | | | | |  | | |  | | |__  |  \| | | |    | |__   \ \  / /| |__  | |       | |
+  |  __  | | | | |  | | |  | |  __| | . ` | | |    |  __|   \ \/ / |  __| | |       | |
+  | |  | |_| |_| |__| | |__| | |____| |\  | | |____| |____   \  /  | |____| |____   | |
+  |_|  |_|_____|_____/|_____/|______|_| \_| |______|______|   \/   |______|______|  |_|
+
+    -->
+    <model name="hidden_level_1-1">
+      <static>true</static>
+      <link name="link">
+        <pose>7 0 -4 0 0 0</pose>
+        <collision name="col"><geometry><box><size>25 70 1</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>25 70 1</size></box></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <!-- This tag and its contents add texture (an image) to our models -->
+            <pbr>
+              <metal>
+                <!-- Point to your image -->
+                <albedo_map>model://textures/stone_textures/stone_wall_seamless_1x1.jpg</albedo_map>
+                <!-- Optional: roughness/metalness for a matte, non-metal look -->
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- floor with realistic surface params -->
+    <model name="hidden_level_1-1_floor">
+      <static>true</static>
+      <pose>7 0 -3.4 0 0 0</pose>
+      <link name="central_arena_floor_link">
+        <collision name="col">
+          <geometry><box><size>25 70 0.1</size></box></geometry>
+          <surface>
+            <!-- Rubber-ish tires on painted plywood/concrete -->
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+                <fdir1>1 0 0</fdir1>
+              </ode>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0.03</restitution_coefficient>
+              <threshold>1e3</threshold>
+            </bounce>
+            <contact>
+              <ode>
+                <kp>1e6</kp>
+                <kd>1e3</kd>
+                <max_vel>1.0</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>25 70 0.1</size></box></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <!-- This tag and its contents add texture (an image) to our models -->
+            <pbr>
+              <metal>
+                <!-- Point to your image -->
+                <albedo_map>model://textures/grass_textures/green_grass_seamless.jpg</albedo_map>
+                <!-- Optional: roughness/metalness for a matte, non-metal look -->
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="hidden_level_1-2">
+      <static>true</static>
+      <link name="link">
+        <pose>40 19 -4 0 0 0</pose>
+        <collision name="col"><geometry><box><size>70 32 1</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>70 32 1</size></box></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <!-- This tag and its contents add texture (an image) to our models -->
+            <pbr>
+              <metal>
+                <!-- Point to your image -->
+                <albedo_map>model://textures/stone_textures/stone_wall_seamless_1x1.jpg</albedo_map>
+                <!-- Optional: roughness/metalness for a matte, non-metal look -->
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- floor with realistic surface params -->
+    <model name="hidden_level_1-2_floor">
+      <static>true</static>
+      <pose>40 19 -3.4 0 0 0</pose>
+      <link name="central_arena_floor_link">
+        <collision name="col">
+          <geometry><box><size>70 32 0.1</size></box></geometry>
+          <surface>
+            <!-- Rubber-ish tires on painted plywood/concrete -->
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+                <fdir1>1 0 0</fdir1>
+              </ode>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0.03</restitution_coefficient>
+              <threshold>1e3</threshold>
+            </bounce>
+            <contact>
+              <ode>
+                <kp>1e6</kp>
+                <kd>1e3</kd>
+                <max_vel>1.0</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>70 32 0.1</size></box></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <!-- This tag and its contents add texture (an image) to our models -->
+            <pbr>
+              <metal>
+                <!-- Point to your image -->
+                <albedo_map>model://textures/grass_textures/green_grass_seamless.jpg</albedo_map>
+                <!-- Optional: roughness/metalness for a matte, non-metal look -->
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="hidden_level_1-3">
+      <static>true</static>
+      <link name="link">
+        <pose>40 -23 -4 0 0 0</pose>
+        <collision name="col"><geometry><box><size>70 24 1</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>70 24 1</size></box></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <!-- This tag and its contents add texture (an image) to our models -->
+            <pbr>
+              <metal>
+                <!-- Point to your image -->
+                <albedo_map>model://textures/stone_textures/stone_wall_seamless_1x1.jpg</albedo_map>
+                <!-- Optional: roughness/metalness for a matte, non-metal look -->
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- floor with realistic surface params -->
+    <model name="hidden_level_1-3_floor">
+      <static>true</static>
+      <pose>40 -23 -3.4 0 0 0</pose>
+      <link name="central_arena_floor_link">
+        <collision name="col">
+          <geometry><box><size>70 24 0.1</size></box></geometry>
+          <surface>
+            <!-- Rubber-ish tires on painted plywood/concrete -->
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+                <fdir1>1 0 0</fdir1>
+              </ode>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0.03</restitution_coefficient>
+              <threshold>1e3</threshold>
+            </bounce>
+            <contact>
+              <ode>
+                <kp>1e6</kp>
+                <kd>1e3</kd>
+                <max_vel>1.0</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>70 24 0.1</size></box></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <!-- This tag and its contents add texture (an image) to our models -->
+            <pbr>
+              <metal>
+                <!-- Point to your image -->
+                <albedo_map>model://textures/grass_textures/green_grass_seamless.jpg</albedo_map>
+                <!-- Optional: roughness/metalness for a matte, non-metal look -->
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+
     <!--    ____  ____       _ ______ _____ _______ _____   -->
     <!--   / __ \|  _ \     | |  ____/ ____|__   __/ ____|  -->
     <!--  | |  | | |_) |    | | |__ | |       | | | (___    -->
