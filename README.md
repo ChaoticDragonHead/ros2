@@ -82,6 +82,9 @@ export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RE
 
 # Important Commands
 
+<br>
+<br>
+
 ## Reload the Shell:
 
 ```shell
@@ -107,8 +110,8 @@ colcon build
 ```shell
 source ~/ros2_ws/install/setup.bash
 ```
-
-
+<br>
+<br>
 
 ## Open RViz to show a visialization of your robot:
 ### 1. Colcon Build and source to make sure any changes are reflected accurately: 
