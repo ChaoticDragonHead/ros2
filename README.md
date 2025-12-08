@@ -347,8 +347,12 @@ model:=/home/aemilio/ros2_ws/src/my_robot_description/urdf/my_robot.urdf.xacro
 ### 1. In one temrinal, run the following Python launch script (after sourcing):
 
 ```shell
-cd ~/ros2_ws \
-source ~/ros2_ws/install/setup.bash \
+cd ~/ros2_ws
+```
+```shell
+source ~/ros2_ws/install/setup.bash
+```
+```shell
 ros2 launch my_robot_bringup two_robots_waterworld_xacro.launch.py
 ```
 **Note:** The process must remain running in order to continue.
@@ -356,8 +360,12 @@ ros2 launch my_robot_bringup two_robots_waterworld_xacro.launch.py
 ### 2. In another terminal, run your teleop node (after sourcing):
 
 ```shell
-cd ~/ros2_ws \
-source ~/ros2_ws/install/setup.bash \
+cd ~/ros2_ws
+```
+```shell
+source ~/ros2_ws/install/setup.bash
+```
+```shell
 ros2 run robot_legion_teleop_python legion_teleop_key
 ```
 **Note:** The process must remain running in order to continue.
@@ -365,8 +373,12 @@ ros2 run robot_legion_teleop_python legion_teleop_key
 ### 3. In yet another terminal, use our FPV mux python file (after sourcing):
 
 ```shell
-cd ~/ros2_ws \
-source ~/ros2_ws/install/setup.bash \
+cd ~/ros2_ws
+```
+```shell
+source ~/ros2_ws/install/setup.bash
+```
+```shell
 ros2 run robot_legion_teleop_python fpv_camera_mux
 ```
 **Note:** The process must remain running in order to continue.
@@ -374,10 +386,18 @@ ros2 run robot_legion_teleop_python fpv_camera_mux
 ### 4. In still yet another terminal, make sure that camera signals are being sent properly (after sourcing):
 
 ```shell
-cd ~/ros2_ws \
-source ~/ros2_ws/install/setup.bash \
-ros2 topic echo /fpv_camera/image_raw \
-  --qos-reliability best_effort \
+cd ~/ros2_ws
+```
+```shell
+source ~/ros2_ws/install/setup.bash
+```
+```shell
+ros2 topic echo /fpv_camera/image_raw
+```
+```shell
+  --qos-reliability best_effort
+```
+```shell
   --qos-durability volatile
 ```
 
