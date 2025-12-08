@@ -17,7 +17,7 @@ setup(
     zip_safe=True,
     maintainer='Vitruvian Systems LLC',
     maintainer_email='emilio@viturvian.systems',
-    description='Keyboard teleoperation node and utilities for Robot Legion simulations.',
+    description='Keyboard teleoperation node and FPV utilities for Robot Legion simulations.',
     license='PolyForm Noncommercial License 1.0.0',
     tests_require=['pytest'],
     entry_points={
@@ -30,6 +30,9 @@ setup(
 
             # Gazebo / Ignition reset utility
             'reset_gz = robot_legion_teleop_python.reset_gz:main',
+
+            # NEW: FPV camera multiplexer
+            'fpv_camera_mux = robot_legion_teleop_python.fpv_camera_mux:main',
         ],
     },
 )
