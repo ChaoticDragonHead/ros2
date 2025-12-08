@@ -91,7 +91,6 @@ export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RE
 # Important Commands
 
 <br>
-<br>
 
 # :truck: :shell:
 ## Reload the Shell:
