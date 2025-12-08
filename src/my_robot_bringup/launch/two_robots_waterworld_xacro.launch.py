@@ -7,6 +7,7 @@ from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description() -> LaunchDescription:
@@ -56,14 +57,14 @@ def generate_launch_description() -> LaunchDescription:
     )
 
     # Run xacro at launch time to produce URDF XML strings
-    emiliobot_description = Command([xacro_exe, " ", emiliobot_xacro])
-    my_robot_description = Command([xacro_exe, " ", my_robot_xacro])
+    emiliobot_description_cmd = Command([xacro_exe, " ", emiliobot_xacro])
+    my_robot_description_cmd = Command([xacro_exe, " ", my_robot_xacro])
 
     # ------------------------------------------------------------------
     # Robot State Publishers (one per robot)
     # ------------------------------------------------------------------
-
-    # Publishes /emiliobot/** TF and robot_description from emiliobot.xacro
+    # NOTE: In Jazzy we must wrap Command(...) in ParameterValue(value_type=str)
+    # so robot_description is treated as a plain string, not YAML.
     emiliobot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
@@ -71,12 +72,15 @@ def generate_launch_description() -> LaunchDescription:
         name="emiliobot_state_publisher",
         output="screen",
         parameters=[
-            {"robot_description": emiliobot_description,
-             "use_sim_time": True},
+            {
+                "robot_description": ParameterValue(
+                    emiliobot_description_cmd, value_type=str
+                ),
+                "use_sim_time": True,
+            },
         ],
     )
 
-    # Publishes /my_robot/** TF and robot_description from my_robot.xacro
     my_robot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
@@ -84,8 +88,12 @@ def generate_launch_description() -> LaunchDescription:
         name="my_robot_state_publisher",
         output="screen",
         parameters=[
-            {"robot_description": my_robot_description,
-             "use_sim_time": True},
+            {
+                "robot_description": ParameterValue(
+                    my_robot_description_cmd, value_type=str
+                ),
+                "use_sim_time": True,
+            },
         ],
     )
 
@@ -104,7 +112,6 @@ def generate_launch_description() -> LaunchDescription:
     # ------------------------------------------------------------------
     # Spawn both robots directly from their URDF strings
     # ------------------------------------------------------------------
-
     # Spawn emiliobot into Gazebo using its URDF string
     spawn_emiliobot = Node(
         package="ros_gz_sim",
@@ -113,9 +120,11 @@ def generate_launch_description() -> LaunchDescription:
         output="screen",
         arguments=[
             "-name", "emiliobot",
-            "-x", "0.0", "-y", "0.0", "-z", "5.5",
+            "-x", "0.0",
+            "-y", "0.0",
+            "-z", "5.5",
             "-Y", "0.0",
-            "-string", emiliobot_description,
+            "-string", emiliobot_description_cmd,
         ],
     )
 
@@ -127,15 +136,16 @@ def generate_launch_description() -> LaunchDescription:
         output="screen",
         arguments=[
             "-name", "my_robot",
-            "-x", "2.0", "-y", "0.0", "-z", "5.5",
+            "-x", "2.0",
+            "-y", "0.0",
+            "-z", "5.5",
             "-Y", "1.57",
-            "-string", my_robot_description,
+            "-string", my_robot_description_cmd,
         ],
     )
 
     # ------------------------------------------------------------------
     # ROS ↔ Gazebo bridge using gazebo_bridge.yaml
-    #   ~/ros2_ws/src/my_robot_bringup/config/gazebo_bridge.yaml
     # ------------------------------------------------------------------
     bridge = Node(
         package="ros_gz_bridge",
@@ -159,12 +169,14 @@ def generate_launch_description() -> LaunchDescription:
     # ------------------------------------------------------------------
     # Return the full launch description
     # ------------------------------------------------------------------
-    return LaunchDescription([
-        gz_sim,
-        emiliobot_state_publisher,
-        my_robot_state_publisher,
-        spawn_emiliobot,
-        spawn_my_robot,
-        bridge,
-        rviz,
-    ])
+    return LaunchDescription(
+        [
+            gz_sim,
+            emiliobot_state_publisher,
+            my_robot_state_publisher,
+            spawn_emiliobot,
+            spawn_my_robot,
+            bridge,
+            rviz,
+        ]
+    )
