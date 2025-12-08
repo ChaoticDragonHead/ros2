@@ -287,6 +287,9 @@ ros2 launch urdf_tutorial display.launch.py
 model:=/home/aemilio/ros2_ws/src/my_robot_description/urdf/my_robot.urdf.xacro
 ```
 
+<br>
+<br>
+
 # :heavy_plus_sign: :pill: :arrow_right: :x:
 ## If adding missing dependencies results in the following error or something similar:
 ```console
