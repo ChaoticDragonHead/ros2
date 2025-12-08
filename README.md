@@ -63,7 +63,7 @@ in your SDF world file will load the water_towel model from the /models director
 
 <br>
 
-# :ballot_box_with_check: :scroll:
+# :white_check_mark: :scroll:
 ## 3. Make sure that the following lines are included in your .bashrc file:
 
 ```shell
@@ -216,7 +216,9 @@ ros2 run robot_legion_teleop_python reset_gz
 ```
 
 <br>
+<br>
 
+# :earth_americas: :x: :rocket:
 ## If Gazebo doesn't open when attempting to open a world from my_robot_gazebo.launch.xml:
 
 ### 1. Try opening your world from ROS2 in only Gazebo.
@@ -240,7 +242,9 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
 **Note:** A file called **_waterworld.sdf_** is referenced in the above commands.  If the world that you are trying to open is not named **_waterworld.sdf_**, then replace **_waterworld.sdf_** with **the name of youe world file** when entering these commands.
 
 <br>
+<br>
 
+# :earth_americas: 
 ## If Gazebo opens but does not load your robot:
 
 ### 1. Open CMakeLists.txt in ~/ros2_ws/src/
