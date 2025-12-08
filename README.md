@@ -168,9 +168,19 @@ ros2 run robot_legion_teleop_python legion_teleop_key   --ros-args -p cmd_vel_to
 ```
 **Note:** Replace **in this command** with **the name of the robot** that you would like to **control**.
 
+<br>
 
+## Show your entire workspace tree in the terminal:
 
+```shell
+tree -L 4 ~/ros2_ws/src
+```
 
+<br>
+<br>
+<br>
+<br>
+<br>
 
 # Common Issues
 
