@@ -149,7 +149,8 @@ ros2 launch my_robot_bringup my_robot.launch.xml
 
 ## 3. Run a control node to control a robot with teleop_twist_keyboard:
 ```shell
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
+ros2 run robot_legion_teleop_python legion_teleop_key \
+  --ros-args -p cmd_vel_topic:=/emiliobot/cmd_vel
 ```
 **Note:** In order to conmtrol the robot, **the terminal window running the teleop control node must be selected** rather than the Gazebo simulation window.
 
