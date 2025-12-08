@@ -175,12 +175,6 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard   --ros-args -r cmd_vel:=/e
 ```
 **Note:** The above command will run a teleop node t control a robot called **emiliobit**.  In order to **run the teleop node to control another robot**, replace the name **emiliobot** in the above command with the name of your robot of chooice (for example, **my_robot**).
 
-##   
-```shell
-ros2 run robot_legion_teleop_python legion_teleop_key   --ros-args -p cmd_vel_topic:=/emiliobot/cmd_vel
-```
-**Note:** Replace **in this command** with **the name of the robot** that you would like to **control**.
-
 <br>
 
 # :deciduous_tree: :deciduous_tree: :deciduous_tree:
