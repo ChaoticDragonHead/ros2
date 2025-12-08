@@ -392,12 +392,8 @@ cd ~/ros2_ws
 source ~/ros2_ws/install/setup.bash
 ```
 ```shell
-ros2 topic echo /fpv_camera/image_raw
-```
-```shell
-  --qos-reliability best_effort
-```
-```shell
+ros2 topic echo /fpv_camera/image_raw \
+  --qos-reliability best_effort \
   --qos-durability volatile
 ```
 
