@@ -1,3 +1,4 @@
+# :book:
 # SETUP INSTRUCTIONS
 
 **Note:** If your **workspace directory is not called ros2_ws**, then **replace ros2_ws** with **the name of your workspace directory** throughout these code segments and commands. 
@@ -9,6 +10,7 @@ git clone https://github.com/AEmilioDiStefano/ros2_ws.git
 ```
 <br>
 
+# :earth_americas: :electric_plug: :a:
 ## 1.  Create a GZ_SIM_SYSTEM_PLUGIN_PATH system variable
 
 ### This will enable the use of our physics plugins.
@@ -26,7 +28,9 @@ export GZ_SIM_SYSTEM_PLUGIN_PATH="/opt/ros/jazzy/lib:${GZ_SIM_SYSTEM_PLUGIN_PATH
 
 Save changes to the .bashrc file and close the editor.
 
+<br>
 
+# :earth_americas: :mountain_biking_man: :a:
 ## 2. Create a GZ_SIM_RESOURCE_PATH system variable
 
 ### This will allow you to reference models in your /models directory via a <uri></uri> in our SDF world files.  
@@ -57,6 +61,9 @@ Now add the code depicted below:
 
 in your SDF world file will load the water_towel model from the /models directory into your world.
 
+<br>
+
+# :ballot_box_with_check: :receipt:
 ## 3. Make sure that the following lines are included in your .bashrc file:
 
 ```shell
@@ -83,7 +90,9 @@ export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RE
 # Important Commands
 
 <br>
+<br>
 
+# :truck: :shell:
 ## Reload the Shell:
 
 ```shell
@@ -91,7 +100,9 @@ source ~/.bashrc
 source install/setup.bash
 ```
 <br>
+<br>
 
+# :building_construction: :crossed_swords:
 ## Build and Execute Your Environment:
 ## 1. Make sure you are in the correct folder (ros2_ws):
 ```shell
@@ -106,8 +117,10 @@ colcon build
 source ~/ros2_ws/install/setup.bash
 ```
 <br>
+<br>
 
-## Open RViz to show a visialization of your robot:
+# :robot:
+## Open RViz to show a visualization of your robot:
 ## 1. Colcon Build and source to make sure any changes are reflected accurately: 
 ```shell
 cd ~/ros2_ws
@@ -121,7 +134,9 @@ ros2 launch urdf_tutorial display.launch.py model:=/home/aemilio/ros2_ws/src/my_
 **Note**: This command will open a XACRO file called my_robot.urdf.xacro which sould already be in your repository.
 
 <br>
+<br>
 
+# :earth_americas: :robot:
 ## Open a Gazebo world with your robot within:
 ## 1. Colcon Build and source to make sure any changes are reflected accurately: 
 ```shell
@@ -142,7 +157,9 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 **Note:** In order to conmtrol the robot, **the terminal window running the teleop control node must be selected** rather than the Gazebo simulation window.
 
 <br>
+<br>
 
+# :earth_americas: :robot: :robot:
 ## Open a Gazebo world with the my_robot.urdf.xacro and another robot within (2 robots total):
 ## 1. Colcon Build and source to make sure any changes are reflected accurately: 
 ```shell
@@ -157,14 +174,21 @@ ros2 launch my_robot_bringup two_robots_waterworld_xacro.launch.py
 **Note**: This command runs a **launch file** that opens a world called **waterworld.sdf** with **both** the robot defined in **my_robot.urdf.xacro** and the robot defined in **emiliobot.urdf.xacro**.
 
 ## 3. Run a control node to control a robot with our own robot_legion_teleop_python package:
- 
+```shell
+ros2 run teleop_twist_keyboard teleop_twist_keyboard   --ros-args -r cmd_vel:=/emiliobot/cmd_vel
+```
+**Note:** The above command will run a teleop node t control a robot called **emiliobit**.  In order to **run the teleop node to control another robot**, replace the name **emiliobot** in the above command with the name of your robot of chooice (for example, **my_robot**).
+
+##   
 ```shell
 ros2 run robot_legion_teleop_python legion_teleop_key   --ros-args -p cmd_vel_topic:=/emiliobot/cmd_vel
 ```
 **Note:** Replace **in this command** with **the name of the robot** that you would like to **control**.
 
 <br>
+<br>
 
+# :deciduous_tree: :deciduous_tree: :deciduous_tree:
 ## Show your entire workspace tree in the terminal:
 
 ```shell
