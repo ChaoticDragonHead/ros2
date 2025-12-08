@@ -205,6 +205,7 @@ tree -L 4 ~/ros2_ws/src
 
 <br>
 
+# :crossed_swords: :ghost: :robot:
 ## Eliminate ghost robots
 This command executes the commands in our reset_gz.py file which removes robots that involuntarily spawn in our Gazebo simulation.
 **If you see that robots which you have removed from you workspace** have **spawned even after the XACRO and all files have been removed** continue to **spawn in Gazebo**, 
