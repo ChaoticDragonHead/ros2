@@ -244,7 +244,7 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
 <br>
 <br>
 
-# :earth_americas: 
+# :earth_americas: :white_check_mark: :robot: :x:
 ## If Gazebo opens but does not load your robot:
 
 ### 1. Open CMakeLists.txt in ~/ros2_ws/src/
