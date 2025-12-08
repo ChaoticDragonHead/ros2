@@ -101,7 +101,6 @@ source ~/.bashrc
 source install/setup.bash
 ```
 <br>
-<br>
 
 # :building_construction: :crossed_swords:
 ## Build and Execute Your Environment:
@@ -118,7 +117,6 @@ colcon build
 source ~/ros2_ws/install/setup.bash
 ```
 <br>
-<br>
 
 # :robot:
 ## Open RViz to show a visualization of your robot:
@@ -134,7 +132,6 @@ ros2 launch urdf_tutorial display.launch.py model:=/home/aemilio/ros2_ws/src/my_
 ```
 **Note**: This command will open a XACRO file called my_robot.urdf.xacro which sould already be in your repository.
 
-<br>
 <br>
 
 # :earth_americas: :robot:
@@ -157,7 +154,6 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 **Note:** In order to conmtrol the robot, **the terminal window running the teleop control node must be selected** rather than the Gazebo simulation window.
 
-<br>
 <br>
 
 # :earth_americas: :robot: :robot:
@@ -186,7 +182,6 @@ ros2 run robot_legion_teleop_python legion_teleop_key   --ros-args -p cmd_vel_to
 ```
 **Note:** Replace **in this command** with **the name of the robot** that you would like to **control**.
 
-<br>
 <br>
 
 # :deciduous_tree: :deciduous_tree: :deciduous_tree:
@@ -218,7 +213,6 @@ ros2 run robot_legion_teleop_python reset_gz
 ```
 
 <br>
-<br>
 
 # :earth_americas: :x: :rocket:
 ## If Gazebo doesn't open when attempting to open a world from my_robot_gazebo.launch.xml:
@@ -243,7 +237,6 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
 ```
 **Note:** A file called **_waterworld.sdf_** is referenced in the above commands.  If the world that you are trying to open is not named **_waterworld.sdf_**, then replace **_waterworld.sdf_** with **the name of youe world file** when entering these commands.
 
-<br>
 <br>
 
 # :earth_americas: :white_check_mark: :robot: :x:
@@ -287,7 +280,6 @@ ros2 launch urdf_tutorial display.launch.py
 model:=/home/aemilio/ros2_ws/src/my_robot_description/urdf/my_robot.urdf.xacro
 ```
 
-<br>
 <br>
 
 # :heavy_plus_sign: :pill: :arrow_right: :x:
