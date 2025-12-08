@@ -63,7 +63,7 @@ in your SDF world file will load the water_towel model from the /models director
 
 <br>
 
-# :ballot_box_with_check: :receipt:
+# :ballot_box_with_check: :scroll:
 ## 3. Make sure that the following lines are included in your .bashrc file:
 
 ```shell
