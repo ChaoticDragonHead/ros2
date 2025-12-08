@@ -344,7 +344,7 @@ model:=/home/aemilio/ros2_ws/src/my_robot_description/urdf/my_robot.urdf.xacro
 
 <br>
 
-### 1. In one temrinal, run the following Python launch script (after sourcing):
+### 1. In one temrinal, run the following commands:
 
 ```shell
 cd ~/ros2_ws
