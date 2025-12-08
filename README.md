@@ -184,6 +184,17 @@ tree -L 4 ~/ros2_ws/src
 
 # Common Issues
 
+<br>
+
+## Eliminate ghost robots
+This command executes the commands in our reset_gz.py file which removes robots that involuntarily spawn in our Gazebo simulation.
+**If you see that robots which you have removed from you workspace** have **spawned even after the XACRO and all files have been removed** continue to **spawn in Gazebo**, 
+run the following command:
+
+```shell
+ros2 run robot_legion_teleop_python reset_gz
+```
+
 ## If Gazebo doesn't open when attempting to open a world from my_robot_gazebo.launch.xml:
 
 ### 1. Try opening your world from ROS2 in only Gazebo.
