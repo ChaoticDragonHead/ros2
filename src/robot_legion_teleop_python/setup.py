@@ -17,14 +17,19 @@ setup(
     zip_safe=True,
     maintainer='Vitruvian Systems LLC',
     maintainer_email='emilio@viturvian.systems',
-    description='Keyboard teleoperation node for Robot Legion simulations.',
-    license='Apache-2.0',
+    description='Keyboard teleoperation node and utilities for Robot Legion simulations.',
+    license='PolyForm Noncommercial License 1.0.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            # ros2 run robot_legion_teleop_python legion_teleop_key
-            # will execute main() in teleop_legion_key.py
+            # Teleop
             'legion_teleop_key = robot_legion_teleop_python.teleop_legion_key:main',
+
+            # Heartbeat monitor (from earlier)
+            'robot_heartbeat = robot_legion_teleop_python.robot_heartbeat:main',
+
+            # Gazebo / Ignition reset utility
+            'reset_gz = robot_legion_teleop_python.reset_gz:main',
         ],
     },
 )
