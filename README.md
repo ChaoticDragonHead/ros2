@@ -172,7 +172,7 @@ ros2 launch my_robot_bringup two_robots_waterworld_xacro.launch.py
 
 ## 3. Run a control node to control a robot with our own robot_legion_teleop_python package:
 ```shell
-ros2 run teleop_twist_keyboard teleop_twist_keyboard   --ros-args -r cmd_vel:=/emiliobot/cmd_vel
+ros2 run robot_legion_teleop_python legion_teleop_key   --ros-args -p cmd_vel_topic:=/emiliobot/cmd_vel
 ```
 **Note:** The above command will run a teleop node t control a robot called **emiliobit**.  In order to **run the teleop node to control another robot**, replace the name **emiliobot** in the above command with the name of your robot of chooice (for example, **my_robot**).
 
