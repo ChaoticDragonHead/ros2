@@ -87,6 +87,7 @@ export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RE
 <br>
 <br>
 
+# :book:
 # Important Commands
 
 <br>
@@ -201,6 +202,7 @@ tree -L 4 ~/ros2_ws/src
 <br>
 <br>
 
+# :exclamation:
 # Common Issues
 
 <br>
