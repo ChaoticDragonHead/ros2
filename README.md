@@ -195,6 +195,8 @@ run the following command:
 ros2 run robot_legion_teleop_python reset_gz
 ```
 
+<br>
+
 ## If Gazebo doesn't open when attempting to open a world from my_robot_gazebo.launch.xml:
 
 ### 1. Try opening your world from ROS2 in only Gazebo.
@@ -217,7 +219,7 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
 ```
 **Note:** A file called **_waterworld.sdf_** is referenced in the above commands.  If the world that you are trying to open is not named **_waterworld.sdf_**, then replace **_waterworld.sdf_** with **the name of youe world file** when entering these commands.
 
-
+<br>
 
 ## If Gazebo opens but does not load your robot:
 
