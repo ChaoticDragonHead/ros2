@@ -245,7 +245,7 @@ ros2 launch my_robot_bringup my_robot.launch.xml
 ros2 run robot_legion_teleop_python legion_teleop_key \
   --ros-args -p cmd_vel_topic:=/emiliobot/cmd_vel
 ```
-**Note:** In order to conmtrol the robot, **the terminal window running the teleop control node must be selected** rather than the Gazebo simulation window.
+**Note:** In order to control the robot, **the terminal window running the teleop control node must be selected** rather than the Gazebo simulation window.
 
 <br>
 
