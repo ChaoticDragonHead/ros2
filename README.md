@@ -1,3 +1,5 @@
+![host-and-port](media/FPV_gif.gif)
+
 # :book:
 # SETUP INSTRUCTIONS
 
