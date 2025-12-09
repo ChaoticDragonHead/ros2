@@ -91,6 +91,95 @@ export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RE
 <br>
 <br>
 
+# :small_airplane: :video_game: :goggles:
+## Start an FPV session within a simulation world
+
+<br>
+
+### 1. In one temrinal, run the following commands:
+
+```shell
+cd ~/ros2_ws
+```
+```shell
+source ~/ros2_ws/install/setup.bash
+```
+```shell
+ros2 launch my_robot_bringup two_robots_waterworld_xacro.launch.py
+```
+**Note:** The process must remain running in order to continue.
+
+### 2. In another terminal, run your teleop node (after sourcing):
+
+```shell
+cd ~/ros2_ws
+```
+```shell
+source ~/ros2_ws/install/setup.bash
+```
+```shell
+ros2 run robot_legion_teleop_python legion_teleop_key
+```
+**Note:** The process must remain running in order to continue.
+
+### 3. In yet another terminal, use our FPV mux python file (after sourcing):
+
+```shell
+cd ~/ros2_ws
+```
+```shell
+source ~/ros2_ws/install/setup.bash
+```
+```shell
+ros2 run robot_legion_teleop_python fpv_camera_mux
+```
+**Note:** The process must remain running in order to continue.
+
+### 4. In still yet another terminal, make sure that camera signals are being sent properly (after sourcing):
+
+```shell
+cd ~/ros2_ws
+```
+```shell
+source ~/ros2_ws/install/setup.bash
+```
+```shell
+ros2 topic echo /fpv_camera/image_raw \
+  --qos-reliability best_effort \
+  --qos-durability volatile
+```
+
+### 5. Now in RViz, click on the 'Add' button on the bottom left of the window at the bottom of the display section.
+**You should see** a pop-up titled 'Create Visualization'
+
+### 6. Select the 'Image' option and click 'OK'
+**SCROLL DOWN** in the "Displays" section on the right of the RViz window until you see the 'Image' that you just added.
+**It will have a red error signal** - this should disappear upon completing the next step.
+
+### 7. Expand the image option by pressing the down arrow to the right of it.
+**You will see a specification called 'Topic'**
+**To the right of the word 'Topic' (in the column to the right)**, double click and click the dropdown arrow to **select a topic**. 
+**Choose /fpv_camera/image_raw**
+
+### 8. In the second terminal where you have teleop running, press the 'm' key and the enter the name of the robot you would like to control.
+
+**You should see** data flowing through the fourth terminal where you are confirming sensor readings.
+
+### 9. Adjust the FPV screen.
+If everything worked correctly, **you should see an image screen with a first-person view** from the perspective of the robot that you chose in step 5.  
+**This window can be expanded larger than your RViz wondow.**
+Make the image window **as large as you like**.
+
+<br>
+
+This code **is ready for integration with a real-world differential drive robot with a real camera**. 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
 # :book:
 # Important Commands
 
@@ -342,89 +431,6 @@ model:=/home/aemilio/ros2_ws/src/my_robot_description/urdf/my_robot.urdf.xacro
 <br>
 <br>
 <br>
-
-# :small_airplane: :video_game: :goggles:
-## For FPV
-
-<br>
-
-### 1. In one temrinal, run the following commands:
-
-```shell
-cd ~/ros2_ws
-```
-```shell
-source ~/ros2_ws/install/setup.bash
-```
-```shell
-ros2 launch my_robot_bringup two_robots_waterworld_xacro.launch.py
-```
-**Note:** The process must remain running in order to continue.
-
-### 2. In another terminal, run your teleop node (after sourcing):
-
-```shell
-cd ~/ros2_ws
-```
-```shell
-source ~/ros2_ws/install/setup.bash
-```
-```shell
-ros2 run robot_legion_teleop_python legion_teleop_key
-```
-**Note:** The process must remain running in order to continue.
-
-### 3. In yet another terminal, use our FPV mux python file (after sourcing):
-
-```shell
-cd ~/ros2_ws
-```
-```shell
-source ~/ros2_ws/install/setup.bash
-```
-```shell
-ros2 run robot_legion_teleop_python fpv_camera_mux
-```
-**Note:** The process must remain running in order to continue.
-
-### 4. In still yet another terminal, make sure that camera signals are being sent properly (after sourcing):
-
-```shell
-cd ~/ros2_ws
-```
-```shell
-source ~/ros2_ws/install/setup.bash
-```
-```shell
-ros2 topic echo /fpv_camera/image_raw \
-  --qos-reliability best_effort \
-  --qos-durability volatile
-```
-
-### 5. Now in RViz, click on the 'Add' button on the bottom left of the window at the bottom of the display section.
-**You should see** a pop-up titled 'Create Visualization'
-
-### 6. Select the 'Image' option and click 'OK'
-**SCROLL DOWN** in the "Displays" section on the right of the RViz window until you see the 'Image' that you just added.
-**It will have a red error signal** - this should disappear upon completing the next step.
-
-### 7. Expand the image option by pressing the down arrow to the right of it.
-**You will see a specification called 'Topic'**
-**To the right of the word 'Topic' (in the column to the right)**, double click and click the dropdown arrow to **select a topic**. 
-**Choose /fpv_camera/image_raw**
-
-### 8. In the second terminal where you have teleop running, press the 'm' key and the enter the name of the robot you would like to control.
-
-**You should see** data flowing through the fourth terminal where you are confirming sensor readings.
-
-### 9. Adjust the FPV screen.
-If everything worked correctly, **you should see an image screen with a first-person view** from the perspective of the robot that you chose in step 5.  
-**This window can be expanded larger than your RViz wondow.**
-Make the image window **as large as you like**.
-
-<br>
-
-This code **is ready for integration with a real-world differential drive robot with a real camera**. 
 
 <br>
 <br>
