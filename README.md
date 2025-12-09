@@ -420,7 +420,7 @@ Make the image window **as large as you like**.
 
 <br>
 
-This code **is ready for integration with a real-world differential drive system with a real camera**. 
+This code **is ready for integration with a real-world differential drive robot with a real camera**. 
 
 <br>
 <br>
