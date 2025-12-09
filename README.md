@@ -397,7 +397,30 @@ ros2 topic echo /fpv_camera/image_raw \
   --qos-durability volatile
 ```
 
-### 5. 
+### 5. In the second terminal where you have teleop running, press the 'm' key and the enter the name of the robot you would like to control.
+
+**You should see** data flowing through the fourth terminal where you are confirming sensor readings.
+
+### 6. Now in RViz, click on the 'Add' button on the bottom left of the window at the bottom of the display section.
+**You should see** a pop-up titled 'Create Visualization'
+
+### 7. Select the 'Image' option and click 'OK'
+**SCROLL DOWN** in the "Displays" section on the right of the RViz window until you see the 'Image' that you just added.
+**It will have a red error signal** - this should disappear upon completing the next step.
+
+### 8. Expand the image option by pressing the down arrow to the right of it.
+**You will see a specification called 'Topic'**
+**To the right of the word 'Topic' (in the column to the right)**, double click and click the dropdown arrow to **select a topic**. 
+**Choose /fpv_camera/image_raw**
+
+### 9. Adjust the FPV screen.
+If everything worked correctly, **you should see an image screen with a first-person view** from the perspective of the robot that you chose in step 5.  
+**This window can be expanded larger than your RViz wondow.**
+Make the image window **as large as you like**.
+
+<br>
+
+This code **is ready for integration with a real-world differential drive system with a real camera**. 
 
 <br>
 <br>
