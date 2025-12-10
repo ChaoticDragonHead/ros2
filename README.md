@@ -86,17 +86,17 @@ export GZ_SIM_SYSTEM_PLUGIN_PATH="/opt/ros/jazzy/lib:${GZ_SIM_SYSTEM_PLUGIN_PATH
 export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RESOURCE_PATH
 ```
 
-:open_file_folder:
+# :open_file_folder: :white_check_mark:
 ## 4. Make sure you are in the correct folder (ros2_ws):
 ```shell
 cd ~/ros2_ws
 ```
-# :building_construction:
+# :building_construction: :muscle:
 ### 5. Build your environment
 ```shell
 colcon build
 ```
-# :crossed_swords:
+# :crossed_swords: 
 ## 6. Execute your environment
 ```shell
 source ~/ros2_ws/install/setup.bash
