@@ -92,7 +92,7 @@ export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RE
 cd ~/ros2_ws
 ```
 # :building_construction: :muscle:
-### 5. Build your environment
+## 5. Build your environment
 ```shell
 colcon build
 ```
