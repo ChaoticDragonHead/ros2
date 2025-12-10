@@ -96,7 +96,7 @@ cd ~/ros2_ws
 ```shell
 colcon build
 ```
-# :crossed_swords: 
+# :crossed_swords: :scream:
 ## 6. Execute your environment
 ```shell
 source ~/ros2_ws/install/setup.bash
