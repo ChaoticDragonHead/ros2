@@ -85,6 +85,23 @@ export GZ_SIM_SYSTEM_PLUGIN_PATH="/opt/ros/jazzy/lib:${GZ_SIM_SYSTEM_PLUGIN_PATH
 ```shell
 export GZ_SIM_RESOURCE_PATH=$HOME/ros2_ws/src/my_robot_bringup/models:$GZ_SIM_RESOURCE_PATH
 ```
+
+:open_file_folder:
+## 4. Make sure you are in the correct folder (ros2_ws):
+```shell
+cd ~/ros2_ws
+```
+# :building_construction:
+### 5. Build your environment
+```shell
+colcon build
+```
+# :crossed_swords:
+## 6. Execute your environment
+```shell
+source ~/ros2_ws/install/setup.bash
+```
+
 <br>
 <br>
 <br>
@@ -191,22 +208,6 @@ This code **is ready for integration with a real-world differential drive robot 
 ```shell
 source ~/.bashrc
 source install/setup.bash
-```
-<br>
-
-# :building_construction: :crossed_swords:
-## Build and Execute Your Environment:
-## 1. Make sure you are in the correct folder (ros2_ws):
-```shell
-cd ~/ros2_ws
-```
-### 2. Build
-```shell
-colcon build
-```
-## 3. Execute
-```shell
-source ~/ros2_ws/install/setup.bash
 ```
 <br>
 
