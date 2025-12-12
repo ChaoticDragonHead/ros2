@@ -15,7 +15,7 @@ def generate_launch_description() -> LaunchDescription:
     Launch Gazebo (gz-sim) with the waterworld arena and spawn two robots:
 
       - emiliobot  (from emiliobot.urdf.xacro)
-      - my_robot   (from my_robot.urdf.xacro)
+      - potatobot   (from potatobot.urdf.xacro)
 
     Both robots are driven directly from their XACRO files using the xacro
     executable at runtime. ros_gz_bridge is started with a YAML config and
@@ -48,17 +48,17 @@ def generate_launch_description() -> LaunchDescription:
 
     # Xacro files for each robot
     #   ~/ros2_ws/src/my_robot_description/urdf/emiliobot.urdf.xacro
-    #   ~/ros2_ws/src/my_robot_description/urdf/my_robot.urdf.xacro
+    #   ~/ros2_ws/src/my_robot_description/urdf/potatobot.urdf.xacro
     emiliobot_xacro = PathJoinSubstitution(
         [description_pkg, "urdf", "emiliobot.urdf.xacro"]
     )
-    my_robot_xacro = PathJoinSubstitution(
-        [description_pkg, "urdf", "my_robot.urdf.xacro"]
+    potatobot_xacro = PathJoinSubstitution(
+        [description_pkg, "urdf", "potatobot.urdf.xacro"]
     )
 
     # Run xacro at launch time to produce URDF XML strings
     emiliobot_description_cmd = Command([xacro_exe, " ", emiliobot_xacro])
-    my_robot_description_cmd = Command([xacro_exe, " ", my_robot_xacro])
+    potatobot_description_cmd = Command([xacro_exe, " ", potatobot_xacro])
 
     # ------------------------------------------------------------------
     # Robot State Publishers (one per robot)
@@ -81,16 +81,16 @@ def generate_launch_description() -> LaunchDescription:
         ],
     )
 
-    my_robot_state_publisher = Node(
+    potatobot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
-        namespace="my_robot",
-        name="my_robot_state_publisher",
+        namespace="potatobot",
+        name="potatobot_state_publisher",
         output="screen",
         parameters=[
             {
                 "robot_description": ParameterValue(
-                    my_robot_description_cmd, value_type=str
+                    potatobot_description_cmd, value_type=str
                 ),
                 "use_sim_time": True,
             },
@@ -128,19 +128,19 @@ def generate_launch_description() -> LaunchDescription:
         ],
     )
 
-    # Spawn my_robot into Gazebo using its URDF string
-    spawn_my_robot = Node(
+    # Spawn potatobot into Gazebo using its URDF string
+    spawn_potatobot = Node(
         package="ros_gz_sim",
         executable="create",
-        name="spawn_my_robot",
+        name="spawn_potatobot",
         output="screen",
         arguments=[
-            "-name", "my_robot",
+            "-name", "potatobot",
             "-x", "2.0",
             "-y", "0.0",
             "-z", "5.5",
             "-Y", "1.57",
-            "-string", my_robot_description_cmd,
+            "-string", potatobot_description_cmd,
         ],
     )
 
@@ -173,9 +173,9 @@ def generate_launch_description() -> LaunchDescription:
         [
             gz_sim,
             emiliobot_state_publisher,
-            my_robot_state_publisher,
+            potatobot_state_publisher,
             spawn_emiliobot,
-            spawn_my_robot,
+            spawn_potatobot,
             bridge,
             rviz,
         ]
