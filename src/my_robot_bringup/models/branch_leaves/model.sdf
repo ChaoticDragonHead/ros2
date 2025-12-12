@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="leaves">
+    <static>true</static>
+    <link name="link_base">
+    <pose>0 0 0 0 0 0</pose>
+        <collision name="col">
+            <geometry><sphere><radius>4</radius></sphere></geometry>
+        </collision>
+        <visual name="vis">
+            <geometry><sphere><radius>4</radius></sphere></geometry>
+          <material>
+            <ambient>0.28 0.94 0.04 1</ambient>
+            <diffuse>0.38 1 0.14 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>textures/bright_green_leaves_small.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+    </link>
+
+    <link name="link_bunch_1">
+    <pose>0 0 2 0 0 0</pose>
+        <collision name="col">
+            <geometry><sphere><radius>4</radius></sphere></geometry>
+        </collision>
+        <visual name="vis">
+            <geometry><sphere><radius>4</radius></sphere></geometry>
+          <material>
+            <ambient>0.28 0.94 0.04 1</ambient>
+            <diffuse>0.38 1 0.14 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>textures/bright_green_leaves_small.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+    </link>
+
+    <link name="link_bunch_2">
+    <pose>0 1 0 0 0 0</pose>
+        <collision name="col">
+            <geometry><sphere><radius>2</radius></sphere></geometry>
+        </collision>
+        <visual name="vis">
+            <geometry><sphere><radius>2</radius></sphere></geometry>
+          <material>
+            <ambient>0.28 0.94 0.04 1</ambient>
+            <diffuse>0.38 1 0.14 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>textures/bright_green_leaves_small.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+    </link>
+
+    <link name="link_bunch_3">
+    <pose>0 0 -2 0 0 0</pose>
+        <collision name="col">
+            <geometry><sphere><radius>4</radius></sphere></geometry>
+        </collision>
+        <visual name="vis">
+            <geometry><sphere><radius>4</radius></sphere></geometry>
+          <material>
+            <ambient>0.28 0.94 0.04 1</ambient>
+            <diffuse>0.38 1 0.14 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>textures/bright_green_leaves_small.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+    </link>
+
+    <link name="link_bunch_5">
+    <pose>2 1 2 0 0 0</pose>
+        <collision name="col">
+            <geometry><sphere><radius>5</radius></sphere></geometry>
+        </collision>
+        <visual name="vis">
+            <geometry><sphere><radius>5</radius></sphere></geometry>
+          <material>
+            <ambient>0.28 0.94 0.04 1</ambient>
+            <diffuse>0.38 1 0.14 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>textures/bright_green_leaves_small.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+    </link>
+  </model>
+</sdf>

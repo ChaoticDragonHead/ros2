@@ -1,0 +1,264 @@
+<sdf version='1.10'>
+  <world name='potatoland'>
+    <!-- Physics: realistic & consistent on basic machines -->
+    <physics name="ode_cpu" type="ode">
+      <!-- 500 Hz sim tick; good balance for CPU-only -->
+      <max_step_size>0.002</max_step_size>
+      <real_time_update_rate>500</real_time_update_rate>
+      <real_time_factor>1.0</real_time_factor>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>50</iters>
+          <sor>1.3</sor>
+        </solver>
+        <!-- Contact params tuned for stable, non-bouncy flips -->
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.2</erp>
+        </constraints>
+      </ode>
+    </physics>
+
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system'/>
+    <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
+    <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
+
+     <!-- Earth gravity -->
+    <gravity>0 0 -9.81</gravity>
+
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+
+    <!-- Lighting: simple, stable; shadows off by default -->
+    <scene>
+      <ambient>0.5 0.5 0.5 1</ambient>
+      <background>0.7 0.7 0.75 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!--Castle-->
+    <include>
+      <name>Castle</name>
+      <uri>model://castle/model.sdf</uri>
+      <pose>150 150 20 0 0 2.356</pose>
+    </include>
+    <!--End Castle-->
+
+
+    <!--Dragon platform-->
+    <model name="dragon_platform">
+      <static>true</static>
+      <include>
+        <name>Animal_Planet_Foam_2Headed_Dragon</name>
+        <uri>model://Animal_Planet_Foam_2Headed_Dragon/model.sdf</uri>
+        <pose>130 115 22.5 0 0 -1.571</pose>
+    </include>
+    <!-- Scale included in the model.sdf file. Scaled to 75x the size-->
+      <link name="link">
+        <pose>130 115 22 0 0 0</pose>
+        <collision name="col"><geometry><cylinder><radius>12</radius><length>1</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>12</radius><length>1</length></cylinder></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://textures/wood_textures/wood_texture_seamless_1x5.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <!--End dragon platform-->
+
+    <include>
+      <name>Eagle</name>
+      <uri>model://Schleich_Bald_Eagle/model.sdf</uri>
+      <pose>165 90 40 0 0 2.356</pose>
+    </include>
+
+    <model name="branch">
+      <static>true</static>
+      <link name="link">
+        <pose>165 90 37.5 0 1.571 -1.571</pose>
+        <collision name="col">
+          <geometry>
+            <cylinder><radius>3</radius><length>20</length></cylinder>
+          </geometry>
+        </collision>
+        <visual name="vis">
+          <geometry>
+            <cylinder><radius>3</radius><length>20</length></cylinder>
+          </geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://textures/wood_textures/bark.jpeg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+      <include>
+        <name>Leaves</name>
+        <uri>model://branch_leaves/model.sdf</uri>
+        <pose>165 77 37.5 0 0 2.356</pose>
+      </include>
+    </model>
+
+    <model name="road_main_castle">
+      <pose>60 57 8 0 -0.087 0.785</pose>
+      <include>
+        <name>Road_1</name>
+        <uri>model://road_yellow_double/model.sdf</uri>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+
+      <include>
+        <name>Road_2</name>
+        <uri>model://road_yellow_double/model.sdf</uri>
+        <pose>20 0 0 0 0 0</pose>
+      </include>
+
+      <include>
+        <name>Road_3</name>
+        <uri>model://road_yellow_double/model.sdf</uri>
+        <pose>40 0 0 0 0 0</pose>
+      </include>
+
+      <include>
+        <name>Road_4</name>
+        <uri>model://road_yellow_double/model.sdf</uri>
+        <pose>-20 0 0 0 0 0</pose>
+      </include>
+
+      <include>
+        <name>Road_5</name>
+        <uri>model://road_yellow_double/model.sdf</uri>
+        <pose>-40 0 0 0 0 0</pose>
+      </include>
+
+      <include>
+        <name>Road_6</name>
+        <uri>model://road_yellow_double/model.sdf</uri>
+        <pose>-60 0 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <!--Dino bot-->
+    <include>
+      <name>Dino Bot</name>
+      <uri>model://Transformers_Age_of_Extinction_Stomp_and_Chomp_Grimlock_Figure/model.sdf</uri>
+      <pose>-10 15 1 0 0 1.571</pose>
+    </include>
+
+    <!--DIno-->
+    <include>
+      <name>Theri</name>
+      <uri>model://Schleich_Therizinosaurus_ln9cruulPqc/model.sdf</uri>
+      <pose>-10 -15 1 0 0 -2.356</pose>
+    </include>
+
+    <!--Big 'ol shark-->
+    <include>
+      <name>Jaws</name>
+      <uri>model://Weisshai_Great_White_Shark/model.sdf</uri>
+      <pose>10 150 -20 0 0 0</pose>
+    </include>
+
+    <!--Fish boat-->
+    <include>
+      <name>Hunter Boat</name>
+      <uri>model://Vessel_E/model.sdf</uri>
+      <pose>5 120 -10 0 0 0</pose>
+    </include>
+
+    <!--Base ground-->
+    <model name="ground">
+      <static>true</static>
+      <link name="link">
+      <collision name="col">
+        <geometry>
+          <box><size>200 200 2</size></box>
+        </geometry>
+      </collision>
+
+      <visual name="vis">
+        <geometry>
+          <box><size>200 200 2</size></box>
+        </geometry>
+
+        <material>
+        <ambient>0.28 0.94 0.04 1</ambient>
+        <diffuse>0.38 1 0.14 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://textures/grass_textures/green_grass_seamless.jpg</albedo_map>
+              <roughness>0.9</roughness>
+              <metalness>0.0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      </link>
+    </model>
+
+    <!--     ____   _____ ______          _   _   -->
+    <!--    / __ \ / ____|  ____|   /\   | \ | |  -->
+    <!--   | |  | | |    | |__     /  \  |  \| |  -->
+    <!--   | |  | | |    |  __|   / /\ \ | . ` |  -->
+    <!--   | |__| | |____| |____ / ____ \| |\  |  -->
+    <!--    \____/ \_____|______/_/    \_\_| \_|  -->
+    <!-- This is the coast waves model stored in models/coast_waves_2 -->
+    <include>
+      <name>coast_waves_2</name>
+      <uri>model://coast_waves_2/model.sdf</uri>
+      <pose>0 0 -10 0 0 0</pose>
+    </include>
+
+
+
+    <!--   _______ _    _ ______    _____ _    _ _   _   -->
+    <!--  |__   __| |  | |  ____|  / ____| |  | | \ | |  -->
+    <!--     | |  | |__| | |__    | (___ | |  | |  \| |  -->
+    <!--     | |  |  __  |  __|    \___ \| |  | | . ` |  -->
+    <!--     | |  | |  | | |____   ____) | |__| | |\  |  -->
+    <!--     |_|  |_|  |_|______| |_____/ \____/|_| \_|  -->
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.10000000000000001 -0.90000000000000002</direction>
+      <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+      <specular>0.200000003 0.200000003 0.200000003 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.90000000000000002</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>
+
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->

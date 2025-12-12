@@ -1,0 +1,386 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="castle">
+      <static>true</static>
+        <link name="link_moat">
+          <pose>0 0 -10 0 0 -1.571</pose>
+          <collision name="col">
+            <geometry>
+              <ellipsoid>
+                <radii>75 100 8</radii>
+              </ellipsoid>
+            </geometry>
+          </collision>
+
+          <visual name="vis">
+            <geometry>
+              <ellipsoid>
+                <radii>75 100 8</radii>
+              </ellipsoid>
+            </geometry>
+
+            <material>
+              <ambient>1 0.24 0.08 1</ambient>
+              <diffuse>1 0.34 0.18 1</diffuse>
+
+              <pbr>
+                <metal>
+                  <albedo_map>textures/misc_textures/lava_5.jpeg</albedo_map>
+                  <roughness>0.8</roughness>
+                  <metalness>0.2</metalness>
+                </metal>
+              </pbr>
+            </material>
+          </visual>
+        </link>
+
+        <link name="link_ground">
+        <pose>0 0 -5 0 0 -1.571</pose>
+          <collision name="col">
+            <geometry>
+              <ellipsoid>
+                <radii>60 80 8</radii>
+              </ellipsoid>
+            </geometry>
+          </collision>
+
+          <visual name="vis">
+            <geometry>
+              <ellipsoid>
+                <radii>60 80 8</radii>
+              </ellipsoid>
+            </geometry>
+
+            <material>
+            <ambient>0.28 0.94 0.04 1</ambient>
+            <diffuse>0.38 1 0.14 1</diffuse>
+
+              <pbr>
+                <metal>
+                  <albedo_map>textures/grass_textures/green_grass_seamless.jpg</albedo_map>
+                  <roughness>1</roughness>
+                  <metalness>0.0</metalness>
+                </metal>
+              </pbr>
+            </material>
+          </visual>
+        </link>
+
+        <link name="link_bottom_ground">
+          <pose>0 0 -10 0 0 0</pose>
+          <collision name="col">
+            <geometry><box><size>200 175 4</size></box></geometry>
+          </collision>
+
+          <visual name="vis">
+            <geometry><box><size>200 175 4</size></box></geometry>
+
+            <material>
+              <ambient>0.35 0.35 0.35 1</ambient>
+              <diffuse>0.45 0.45 0.45 1</diffuse>
+              <pbr>
+                <metal>
+                  <albedo_map>textures/soil_textures/dirt.jpeg</albedo_map>
+                  <roughness>1</roughness>
+                  <metalness>0.0</metalness>
+                </metal>
+              </pbr>
+            </material>
+          </visual>
+        </link>
+
+        <link name="link_base">
+        <pose>0 0 20 0 0 0</pose>
+        <collision name="col"><geometry><box><size>40 80 40</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>80 40 40</size></box></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <!-- This tag and its contents add texture (an image) to our models -->
+            <pbr>
+              <metal>
+                <!-- Point to your image -->
+                <albedo_map>textures/stone_textures/stone_wall_seamless_2x1.jpg</albedo_map>
+                <!-- Optional: roughness/metalness for a matte, non-metal look -->
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+
+      <link name="link_tower1">
+      <pose>-40 -20 25 0 0 0</pose>
+        <collision name="col"><geometry><cylinder><radius>10</radius><length>50</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>10</radius><length>50</length></cylinder></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>textures/stone_textures/stone_wall_seamless_1x1.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+
+      <link name="link_tower2">
+      <pose>-40 20 25 0 0 0</pose>
+        <collision name="col"><geometry><cylinder><radius>10</radius><length>50</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>10</radius><length>50</length></cylinder></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>textures/stone_textures/stone_wall_seamless_1x1.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+
+      <link name="link_tower3">
+      <pose>40 -20 25 0 0 0</pose>
+        <collision name="col"><geometry><cylinder><radius>10</radius><length>50</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>10</radius><length>50</length></cylinder></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>textures/stone_textures/stone_wall_seamless_1x1.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+
+      <link name="link_tower4">
+      <pose>40 20 25 0 0 0</pose>
+        <collision name="col"><geometry><cylinder><radius>10</radius><length>50</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>10</radius><length>50</length></cylinder></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>textures/stone_textures/stone_wall_seamless_1x1.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+
+      <link name="link_trim1">
+        <pose>0 17 2.5 0 0 0</pose>
+        <collision name="col">
+            <geometry>
+                <box><size>80 10 5</size></box>
+            </geometry>
+        </collision>
+        <visual name="vis">
+            <geometry>
+                <box><size>80 10 5</size></box>
+            </geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>textures/stone_textures/stone_wall_seamless_2x1.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+    </link>
+
+    <link name="link_trim2">
+        <pose> 0 -17 2.5 0 0 0</pose>
+        <collision name="col">
+            <geometry>
+                <box><size>80 10 5</size></box>
+            </geometry>
+        </collision>
+        <visual name="vis">
+            <geometry>
+                <box><size>80 10 5</size></box>
+            </geometry>
+            <material>
+                <ambient>0.35 0.35 0.35 1</ambient>
+                <diffuse>0.45 0.45 0.45 1</diffuse>
+                <pbr>
+                    <metal>
+                        <albedo_map>textures/stone_textures/stone_wall_seamless_2x1.jpg</albedo_map>
+                        <roughness>0.9</roughness>
+                        <metalness>0.0</metalness>
+                    </metal>
+                </pbr>
+            </material>
+        </visual>
+    </link>
+
+    <link name="link_trim3">
+        <pose>0 17 37.5 0 0 0</pose>
+        <collision name="col">
+            <geometry>
+                <box><size>80 10 5</size></box>
+            </geometry>
+        </collision>
+        <visual name="vis">
+            <geometry>
+                <box><size>80 10 5</size></box>
+            </geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>textures/stone_textures/stone_wall_seamless_2x1.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+    </link>
+
+    <link name="link_trim4">
+        <pose> 0 -16 37.5 0 0 0</pose>
+        <collision name="col">
+            <geometry>
+                <box><size>80 10 5</size></box>
+            </geometry>
+        </collision>
+        <visual name="vis">
+            <geometry>
+                <box><size>80 10 5</size></box>
+            </geometry>
+            <material>
+                <ambient>0.35 0.35 0.35 1</ambient>
+                <diffuse>0.45 0.45 0.45 1</diffuse>
+                <pbr>
+                    <metal>
+                        <albedo_map>textures/stone_textures/stone_wall_seamless_2x1.jpg</albedo_map>
+                        <roughness>0.9</roughness>
+                        <metalness>0.0</metalness>
+                    </metal>
+                </pbr>
+            </material>
+        </visual>
+    </link>
+
+    <link name="link_middle_tower">
+        <pose>0 0 30 0 0 0</pose>
+        <collision name="col"><geometry><box><size>20 20 60</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>20 20 60</size></box></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <!-- This tag and its contents add texture (an image) to our models -->
+            <pbr>
+              <metal>
+                <!-- Point to your image -->
+                <albedo_map>textures/stone_textures/stone_wall_seamless_2x1.jpg</albedo_map>
+                <!-- Optional: roughness/metalness for a matte, non-metal look -->
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+    </link>
+
+    <link name="link_draw_bottom">
+        <pose>0 20 10 0 0 0</pose>
+        <collision name="col"><geometry><box><size>20 5 20</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>20 5 20</size></box></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <!-- This tag and its contents add texture (an image) to our models -->
+            <pbr>
+              <metal>
+                <!-- Point to your image -->
+                <albedo_map>textures/wood_textures/wood_texture_seamless_1x2.jpg</albedo_map>
+                <!-- Optional: roughness/metalness for a matte, non-metal look -->
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+    </link>
+
+    <link name="link_draw_top">
+        <pose>0 20 20 1.571 0 0</pose>
+        <collision name="col"><geometry><cylinder><radius>10</radius><length>5</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>10</radius><length>5</length></cylinder></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.45 0.45 0.45 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://textures/wood_textures/wood_texture_seamless_1x1.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+    </link>
+
+    <link name="link_tower_roof">
+    <pose>0 0 68 0 0 0</pose>
+
+        <collision name="col">
+            <geometry>
+                <cone>
+                    <radius>16</radius>
+                    <length>20</length>
+                </cone>
+            </geometry>
+        </collision>
+
+        <visual name="vis">
+            <geometry>
+                <cone>
+                    <radius>16</radius>
+                    <length>20</length>
+                </cone>
+            </geometry>
+          <material>
+            <ambient>1 0.73 0.24 1</ambient>
+            <diffuse>1 0.83 0.34 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://textures/wood_textures/wood_texture_seamless_1x10.jpg</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+    </link>
+  </model>
+</sdf>

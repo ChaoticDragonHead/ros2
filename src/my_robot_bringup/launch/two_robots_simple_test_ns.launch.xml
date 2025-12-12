@@ -1,0 +1,72 @@
+<launch>
+
+    <!-- ============================
+         File paths for both robots
+         ============================ -->
+
+    <!-- EMILIOBOT -->
+    <let name="emiliobot_urdf" value="$(find-pkg-share my_robot_description)/urdf/emiliobot.urdf.xacro" />
+
+    <!-- POTATOBOT -->
+    <let name="potatobot_urdf" value="$(find-pkg-share my_robot_description)/urdf/potatobot.urdf.xacro" />
+
+    <!-- Shared paths -->
+    <let name="gazebo_config_path" value="$(find-pkg-share my_robot_bringup)/config/gazebo_bridge.yaml" />
+    <let name="rviz_config_path" value="$(find-pkg-share my_robot_description)/rviz/urdf_config.rviz" />
+    <let name="world_path" value="$(find-pkg-share my_robot_bringup)/worlds/simple_test.sdf" />
+
+    <!-- ==================================
+         Robot State Publishers for both robots
+         ================================== -->
+
+    <!-- EMILIOBOT -->
+    <node pkg="robot_state_publisher" exec="robot_state_publisher" name="emiliobot_state_publisher">
+        <param name="robot_description" value="$(command 'xacro $(var emiliobot_urdf)')" />
+    </node>
+
+    <!-- POTATOBOT -->
+    <node pkg="robot_state_publisher" exec="robot_state_publisher" name="potatobot_state_publisher">
+        <param name="robot_description" value="$(command 'xacro $(var potatobot_urdf)')" />
+    </node>
+
+    <!-- ======================
+         Gazebo (Ignition/GZ)
+         ====================== -->
+    <include file="$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py">
+        <arg name="gz_args" value="$(var world_path)" />
+    </include>
+
+    <!-- ======================
+         Spawn robots in Gazebo
+         ====================== -->
+
+    <!-- Spawn EMILIOBOT -->
+    <node pkg="ros_gz_sim" exec="create"
+          name="spawn_emiliobot"
+          args="-topic robot_description
+                -name emiliobot
+                -x 0.0 -y 0.0 -z 5.5
+                -Y 0.0" />
+
+    <!-- Spawn POTATOBOT -->
+    <node pkg="ros_gz_sim" exec="create"
+          name="spawn_potatobot"
+          args="-topic robot_description
+                -name potatobot
+                -x 2.0 -y 0.0 -z 5.5
+                -Y 1.57" />
+
+    <!-- ======================
+         ROS ↔ Gazebo Bridge
+         ====================== -->
+    <node pkg="ros_gz_bridge" exec="parameter_bridge">
+        <param name="config_file" value="$(var gazebo_config_path)" />
+    </node>
+
+    <!-- ======================
+         RViz
+         ====================== -->
+    <node pkg="rviz2" exec="rviz2" output="screen"
+          args="-d $(var rviz_config_path)" />
+
+</launch>

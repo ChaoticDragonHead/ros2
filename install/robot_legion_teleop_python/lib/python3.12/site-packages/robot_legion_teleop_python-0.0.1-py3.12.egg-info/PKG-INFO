@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: robot-legion-teleop-python
+Version: 0.0.1
+Summary: Keyboard teleoperation node and FPV utilities for Robot Legion simulations.
+Maintainer: Vitruvian Systems LLC
+Maintainer-email: emilio@viturvian.systems
+License: PolyForm Noncommercial License 1.0.0

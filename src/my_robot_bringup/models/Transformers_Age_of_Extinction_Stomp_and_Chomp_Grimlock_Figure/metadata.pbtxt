@@ -1,0 +1,39 @@
+model {
+  file: "model.sdf"
+}
+name: "Transformers_Age_of_Extinction_Stomp_and_Chomp_Grimlock_Figure"
+description: "Transformers Age of Extinction Stomp and Chomp Grimlock Figure\nYour Transformers adventures just got a whole lot bigger! Your Chomp and Stomp Grimlock figure is a giant, 20-inch robot with a mighty sword who\'s ready to take on any enemy. He changes in 1 step to a dino with a terrible, chomping jaw and light-up eyes! Team him up with the included Optimus Prime mini-figure for maximum mayhem."
+version: 1
+authors {
+  name: "Google"
+  email: "scanned-objects@google.com"
+}
+legal {
+  copyright: "Copyright 2020 Google LLC."
+  license: "Creative Commons Attribution 4.0 International"
+}
+annotations {
+  key: "brand"
+  value: "Hasbro"
+}
+annotations {
+  key: "gtin"
+  value: "653569964032"
+}
+annotations {
+  key: "mpn"
+  value: "a6145"
+}
+annotations {
+  key: "sku"
+  value: "A6145"
+}
+compatibilities {
+  name: "Gazebo"
+  version {
+    major: 11
+  }
+}
+categories {
+  first: "Toys"
+}

@@ -1,0 +1,49 @@
+[0.007s] Invoking command in '/home/jo-jo/ros2_ws/build/my_robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/jo-jo/ros2_ws/src/my_robot_description -DCMAKE_INSTALL_PREFIX=/home/jo-jo/ros2_ws/install/my_robot_description
+[0.110s] -- The C compiler identification is GNU 13.3.0
+[0.206s] -- The CXX compiler identification is GNU 13.3.0
+[0.219s] -- Detecting C compiler ABI info
+[0.278s] -- Detecting C compiler ABI info - done
+[0.285s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.285s] -- Detecting C compile features
+[0.285s] -- Detecting C compile features - done
+[0.292s] -- Detecting CXX compiler ABI info
+[0.352s] -- Detecting CXX compiler ABI info - done
+[0.357s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.357s] -- Detecting CXX compile features
+[0.357s] -- Detecting CXX compile features - done
+[0.362s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.444s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.556s] -- Configuring done (0.5s)
+[0.557s] -- Generating done (0.0s)
+[0.558s] -- Build files have been written to: /home/jo-jo/ros2_ws/build/my_robot_description
+[0.561s] Invoked command in '/home/jo-jo/ros2_ws/build/my_robot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/jo-jo/ros2_ws/src/my_robot_description -DCMAKE_INSTALL_PREFIX=/home/jo-jo/ros2_ws/install/my_robot_description
+[0.562s] Invoking command in '/home/jo-jo/ros2_ws/build/my_robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jo-jo/ros2_ws/build/my_robot_description -- -j28 -l28
+[0.588s] Invoked command in '/home/jo-jo/ros2_ws/build/my_robot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jo-jo/ros2_ws/build/my_robot_description -- -j28 -l28
+[0.594s] Invoking command in '/home/jo-jo/ros2_ws/build/my_robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jo-jo/ros2_ws/build/my_robot_description
+[0.597s] -- Install configuration: ""
+[0.597s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description//urdf
+[0.598s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description//urdf/mobile_base_gazebo.xacro
+[0.598s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description//urdf/emiliobot.urdf.xacro
+[0.598s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description//urdf/my_robot.urdf.xacro
+[0.598s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description//urdf/common_properties.xacro
+[0.598s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description//launch
+[0.598s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description//launch/display.launch.xml
+[0.598s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description//rviz
+[0.598s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description//rviz/urdf_config.rviz
+[0.598s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description//rviz/urdf_config1.rviz
+[0.598s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/ament_index/resource_index/package_run_dependencies/my_robot_description
+[0.599s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/ament_index/resource_index/parent_prefix_path/my_robot_description
+[0.599s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/environment/ament_prefix_path.sh
+[0.599s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/environment/ament_prefix_path.dsv
+[0.599s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/environment/path.sh
+[0.599s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/environment/path.dsv
+[0.599s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/local_setup.bash
+[0.599s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/local_setup.sh
+[0.599s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/local_setup.zsh
+[0.599s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/local_setup.dsv
+[0.599s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/package.dsv
+[0.599s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/ament_index/resource_index/packages/my_robot_description
+[0.600s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/cmake/my_robot_descriptionConfig.cmake
+[0.600s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/cmake/my_robot_descriptionConfig-version.cmake
+[0.600s] -- Installing: /home/jo-jo/ros2_ws/install/my_robot_description/share/my_robot_description/package.xml
+[0.601s] Invoked command in '/home/jo-jo/ros2_ws/build/my_robot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jo-jo/ros2_ws/build/my_robot_description

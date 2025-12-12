@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>robot_legion_teleop_python</name>
+  <version>0.0.1</version>
+  <description>
+    Keyboard teleoperation and FPV camera mux utilities for Robot Legion simulations.
+  </description>
+
+  <maintainer email="emilio@vitruvian.systems">Vitruvian Systems LLC</maintainer>
+  <license>CC-BY-NC-4.0</license>
+
+  <!-- Build tools -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+
+  <!-- Runtime dependencies -->
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <!-- Optional test deps -->
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <test_depend>pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
