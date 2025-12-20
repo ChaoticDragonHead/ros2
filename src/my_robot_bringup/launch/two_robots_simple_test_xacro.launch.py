@@ -1,4 +1,11 @@
 # ~/ros2_ws/src/my_robot_bringup/launch/two_robots_simple_test_xacro.launch.py
+import os
+
+import yaml
+
+from launch.actions import DeclareLaunchArgument
+from launch.launch_context import LaunchContext
+from launch.substitutions import EnvironmentVariable, LaunchConfiguration
 
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
@@ -37,6 +44,9 @@ def generate_launch_description() -> LaunchDescription:
     gazebo_config = PathJoinSubstitution(
         [bringup_pkg, "config", "gazebo_bridge.yaml"]
     )
+
+    #String replace
+    # gazebo_config = gazebo_config_orig.replace("#PLACEHOLDER", "simple_test")
 
     # RViz config: ~/ros2_ws/src/my_robot_description/rviz/urdf_config.rviz
     rviz_config = PathJoinSubstitution(

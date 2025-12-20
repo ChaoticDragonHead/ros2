@@ -12,7 +12,7 @@
 # -------------------------
 
 - ros_topic_name: "/emiliobot/joint_states"
-  gz_topic_name: "/world/simple_test/model/emiliobot/joint_state"
+  gz_topic_name: "/world/#PLACEHOLDER/model/emiliobot/joint_state"
   ros_type_name: "sensor_msgs/msg/JointState"
   gz_type_name: "gz.msgs.Model"
   direction: GZ_TO_ROS
@@ -34,7 +34,7 @@
 # -------------------------
 
 - ros_topic_name: "/my_robot/joint_states"
-  gz_topic_name: "/world/simple_test/model/my_robot/joint_state"
+  gz_topic_name: "/world/#PLACEHOLDER/model/my_robot/joint_state"
   ros_type_name: "sensor_msgs/msg/JointState"
   gz_type_name: "gz.msgs.Model"
   direction: GZ_TO_ROS
@@ -56,7 +56,7 @@
 # -------------------------
 
 - ros_topic_name: "/potatobot/joint_states"
-  gz_topic_name: "/world/simple_test/model/my_robot/joint_state"
+  gz_topic_name: "/world/#PLACEHOLDER/model/my_robot/joint_state"
   ros_type_name: "sensor_msgs/msg/JointState"
   gz_type_name: "gz.msgs.Model"
   direction: GZ_TO_ROS
@@ -78,13 +78,13 @@
 #  EMILIOBOT CAMERA
 # =======================
 - ros_topic_name: "/emiliobot/camera/image_raw"
-  gz_topic_name: "/world/simple_test/model/emiliobot/link/base_footprint/sensor/front_camera/image"
+  gz_topic_name: "/world/#PLACEHOLDER/model/emiliobot/link/base_footprint/sensor/front_camera/image"
   ros_type_name: "sensor_msgs/msg/Image"
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS
 
 - ros_topic_name: "/emiliobot/camera/camera_info"
-  gz_topic_name: "/world/simple_test/model/emiliobot/link/base_footprint/sensor/front_camera/camera_info"
+  gz_topic_name: "/world/#PLACEHOLDER/model/emiliobot/link/base_footprint/sensor/front_camera/camera_info"
   ros_type_name: "sensor_msgs/msg/CameraInfo"
   gz_type_name: "gz.msgs.CameraInfo"
   direction: GZ_TO_ROS
@@ -93,13 +93,13 @@
 #  MY_ROBOT CAMERA
 # =======================
 - ros_topic_name: "/my_robot/camera/image_raw"
-  gz_topic_name: "/world/simple_test/model/my_robot/link/base_footprint/sensor/front_camera/image"
+  gz_topic_name: "/world/#PLACEHOLDER/model/my_robot/link/base_footprint/sensor/front_camera/image"
   ros_type_name: "sensor_msgs/msg/Image"
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS
 
 - ros_topic_name: "/my_robot/camera/camera_info"
-  gz_topic_name: "/world/simple_test/model/my_robot/link/base_footprint/sensor/front_camera/camera_info"
+  gz_topic_name: "/world/#PLACEHOLDER/model/my_robot/link/base_footprint/sensor/front_camera/camera_info"
   ros_type_name: "sensor_msgs/msg/CameraInfo"
   gz_type_name: "gz.msgs.CameraInfo"
   direction: GZ_TO_ROS
@@ -108,13 +108,13 @@
 #  POTATOBOT CAMERA
 # =======================
 - ros_topic_name: "/potatobot/camera/image_raw"
-  gz_topic_name: "/world/simple_test/model/potatobot/link/base_footprint/sensor/front_camera/image"
+  gz_topic_name: "/world/#PLACEHOLDER/model/potatobot/link/base_footprint/sensor/front_camera/image"
   ros_type_name: "sensor_msgs/msg/Image"
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS
 
 - ros_topic_name: "/my_robot/camera/camera_info"
-  gz_topic_name: "/world/simple_test/model/potatobot/link/base_footprint/sensor/front_camera/camera_info"
+  gz_topic_name: "/world/#PLACEHOLDER/model/potatobot/link/base_footprint/sensor/front_camera/camera_info"
   ros_type_name: "sensor_msgs/msg/CameraInfo"
   gz_type_name: "gz.msgs.CameraInfo"
   direction: GZ_TO_ROS

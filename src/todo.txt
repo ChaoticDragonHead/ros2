@@ -1,0 +1,3 @@
+TODO:
+- Add functionality so that joint publisher can change joint states for robot in robot_legion python script
+- Add system variable in bridges config file so that world file is interchangeable - this would allow full functionality in launch scripts
