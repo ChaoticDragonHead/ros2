@@ -89,6 +89,18 @@
   gz_type_name: "gz.msgs.CameraInfo"
   direction: GZ_TO_ROS
 
+- ros_topic_name: "/emiliobot/camera/image_raw"
+  gz_topic_name: "/world/waterworld/model/emiliobot/link/base_footprint/sensor/front_camera/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/emiliobot/camera/camera_info"
+  gz_topic_name: "/world/waterworld/model/emiliobot/link/base_footprint/sensor/front_camera/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
 # =======================
 #  MY_ROBOT CAMERA
 # =======================
@@ -104,6 +116,18 @@
   gz_type_name: "gz.msgs.CameraInfo"
   direction: GZ_TO_ROS
 
+- ros_topic_name: "/my_robot/camera/image_raw"
+  gz_topic_name: "/world/waterworld/model/my_robot/link/base_footprint/sensor/front_camera/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/my_robot/camera/camera_info"
+  gz_topic_name: "/world/waterworld/model/my_robot/link/base_footprint/sensor/front_camera/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
 # =======================
 #  POTATOBOT CAMERA
 # =======================
@@ -115,6 +139,18 @@
 
 - ros_topic_name: "/my_robot/camera/camera_info"
   gz_topic_name: "/world/simple_test/model/potatobot/link/base_footprint/sensor/front_camera/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/potatobot/camera/image_raw"
+  gz_topic_name: "/world/waterworld/model/potatobot/link/base_footprint/sensor/front_camera/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/my_robot/camera/camera_info"
+  gz_topic_name: "/world/waterworld/model/potatobot/link/base_footprint/sensor/front_camera/camera_info"
   ros_type_name: "sensor_msgs/msg/CameraInfo"
   gz_type_name: "gz.msgs.CameraInfo"
   direction: GZ_TO_ROS
