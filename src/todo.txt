@@ -1,3 +1,11 @@
 TODO:
 - Add functionality so that joint publisher can change joint states for robot in robot_legion python script
-- Add system variable in bridges config file so that world file is interchangeable - this would allow full functionality in launch scripts
+- Set  up launch scripts/teleop script to auto-launch camera script to reduce the number of terminals needed
+- Set up functionality in camera script to auto-launch a camera window
+- Add gyroscope sensor to potatobot
+- Add functionality to auto trigger robot arm to right robot if it tips
+- Split one arm into two arms, lower them on the robot, and angle the pusher to make tipping function better
+- Add some weapon to the front joint (hammer, net, hook, etc)
+
+Completed:
+- CHanged .yaml file to include multiple worlds in camera bridges to allow for greater functionality in getting camera to publish image when multiple test worlds are used
