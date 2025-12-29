@@ -33,6 +33,9 @@ setup(
 
             # NEW: FPV camera multiplexer
             'fpv_camera_mux = robot_legion_teleop_python.fpv_camera_mux:main',
+
+            #Potato's
+            'potato_legion_teleop = robot_legion_teleop_python.potato_teleop_legion_key:main'
         ],
     },
 )

@@ -28,7 +28,7 @@
     <gazebo>
         <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
             <joint_name>arm_base_joint</joint_name>
-            <initial_velocity>0.2</initial_velocity>
+            <initial_velocity>0.0</initial_velocity>
             <topic>/arm_base_joint/cmd_vel</topic>
         </plugin>
     </gazebo>

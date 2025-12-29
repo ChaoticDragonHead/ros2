@@ -29,6 +29,14 @@
         <color rgba="0.5 0.5 0.5 1" />
     </material>
 
+    <material name="red">
+        <color rgba="0.5 0 0 1" />
+    </material>
+    
+    <material name="black">
+        <color rgba="0 0 0 1" />
+    </material>
+
 
     <link name="base_footprint" /> <!--Self closing link tag, no properties-->
     <!--Link tags here. Links are physical structures in the robot. Joints connect links, can be moveable or immovable-->

@@ -11,6 +11,7 @@ setup.py
 resource/robot_legion_teleop_python
 robot_legion_teleop_python/__init__.py
 robot_legion_teleop_python/fpv_camera_mux.py
+robot_legion_teleop_python/potato_teleop_legion_key.py
 robot_legion_teleop_python/reset_gz.py
 robot_legion_teleop_python/teleop_legion_key.py
 robot_legion_teleop_python/testing_teleop_legion_key.py

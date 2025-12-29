@@ -1,5 +1,6 @@
 [console_scripts]
 fpv_camera_mux = robot_legion_teleop_python.fpv_camera_mux:main
 legion_teleop_key = robot_legion_teleop_python.teleop_legion_key:main
+potato_legion_teleop = robot_legion_teleop_python.potato_teleop_legion_key:main
 reset_gz = robot_legion_teleop_python.reset_gz:main
 robot_heartbeat = robot_legion_teleop_python.robot_heartbeat:main
