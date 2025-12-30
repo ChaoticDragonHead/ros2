@@ -23,6 +23,7 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String
 from std_msgs.msg import Float64 #Imported Float64 to publish float64 values to move joints in the robot
+from sensor_msgs.msg import JointState #Joint state publisher
 
 
 def get_key(settings):
@@ -60,11 +61,14 @@ class RobotLegionTeleop(Node):
 
         #Publisher for arm joint movement
         # Old code for publisher > pusherArmJoint_pub = rospy.Publisher('/potatobot/arm_base_joint_velocity_controller/command', Float64, queue_size=10)
-        self.armBaseJointPublisher_ = self.create_publisher(Float64, '/arm_base_joint/cmd_vel', 10)
+        self.armBaseJointPublisher_ = self.create_publisher(JointState, '/arm_base_joint/cmd_vel', 10)
 
 
         self.pusher_velocity = 0.6 #velocity = mps
         self.pusher_limit = 0.1 #limit should be half of arm plus half of pusher length
+
+        #Joint names array
+        self.joint_names = ['base_joint','base_right_wheel_joint','base_left_wheel_joint','base_caster_wheel_joint','left_pusher_pusher_arm_joint','right_pusher_pusher_arm_joint','arm_base_joint','camera_joint']
 
         # Publisher for active robot name
         self.active_robot_pub = self.create_publisher(String, '/active_robot', 10)
@@ -206,16 +210,33 @@ class RobotLegionTeleop(Node):
     # -----------------------------------------------------------------------
     def _pusher_left(self):
         #Set velocity to -.1 unless joint position is greater than .25
-        self.armBaseJointPublisher_.publish(Float64(data=self.pusher_velocity))
-        print("Left pusher triggered. Value of joint position " + str(self.pusher_velocity))
+        msg = JointState()
+        msg.name = self.joint_names[7]
+        msg.velocity = self.pusher_velocity
+
+        print("Publishing to joint " + str(msg.name) + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.velocity))
+        self.armBaseJointPublisher_.publish(msg)
+        print("Joint triggered")
 
     def _pusher_right(self):
-        # self.joint_positions[6] += self.pusher_velocity
-        print("Right pusher triggered Value of joint position ")
+        #Set velocity to -.1 unless joint position is greater than .25
+        msg = JointState()
+        msg.name = self.joint_names[7]
+        msg.velocity = self.pusher_velocity
+
+        print("Publishing to joint " + str(msg.name) + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.velocity))
+        self.armBaseJointPublisher_.publish(msg)
+        print("Joint triggered")
     
     def _pusher_center(self):
-        # self.joint_positions[6] = 0
-        print("Center pusher triggered Value of joint position ")
+        #Set velocity to -.1 unless joint position is greater than .25
+        msg = JointState()
+        msg.name = self.joint_names[7]
+        msg.velocity = self.pusher_velocity
+
+        print("Publishing to joint " + str(msg.name) + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.velocity))
+        self.armBaseJointPublisher_.publish(msg)
+        print("Joint triggered")
 
     # ------------- Twist republishing -------------
 
@@ -363,6 +384,7 @@ class RobotLegionTeleop(Node):
                 elif key in ('j', 'k', 'l'):
                     print("pusherarm triggered")
                     #publishing message to joint
+                    #self.armBaseJointPublisher_.publish(velocity=1) < does not work "Exception in teleop: Publisher.publish() got an unexpected keyword argument 'velocity'"
                     self.armBaseJointPublisher_.publish(velocity=1)
 
                 else:

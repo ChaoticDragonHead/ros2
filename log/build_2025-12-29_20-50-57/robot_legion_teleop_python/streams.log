@@ -1,0 +1,28 @@
+[0.369s] Invoking command in '/home/jo-jo/ros2_ws/src/robot_legion_teleop_python': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jo-jo/ros2_ws/build/robot_legion_teleop_python/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jo-jo/ros2_ws/install/robot_legion_teleop_python/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/robot_legion_teleop_python build --build-base /home/jo-jo/ros2_ws/build/robot_legion_teleop_python/build install --record /home/jo-jo/ros2_ws/build/robot_legion_teleop_python/install.log --single-version-externally-managed install_data
+[0.490s] running egg_info
+[0.498s] writing ../../build/robot_legion_teleop_python/robot_legion_teleop_python.egg-info/PKG-INFO
+[0.498s] writing dependency_links to ../../build/robot_legion_teleop_python/robot_legion_teleop_python.egg-info/dependency_links.txt
+[0.498s] writing entry points to ../../build/robot_legion_teleop_python/robot_legion_teleop_python.egg-info/entry_points.txt
+[0.498s] writing requirements to ../../build/robot_legion_teleop_python/robot_legion_teleop_python.egg-info/requires.txt
+[0.498s] writing top-level names to ../../build/robot_legion_teleop_python/robot_legion_teleop_python.egg-info/top_level.txt
+[0.515s] reading manifest file '../../build/robot_legion_teleop_python/robot_legion_teleop_python.egg-info/SOURCES.txt'
+[0.515s] writing manifest file '../../build/robot_legion_teleop_python/robot_legion_teleop_python.egg-info/SOURCES.txt'
+[0.515s] running build
+[0.515s] running build_py
+[0.515s] copying robot_legion_teleop_python/potato_teleop_legion_key.py -> /home/jo-jo/ros2_ws/build/robot_legion_teleop_python/build/lib/robot_legion_teleop_python
+[0.515s] running install
+[0.518s] running install_lib
+[0.527s] copying /home/jo-jo/ros2_ws/build/robot_legion_teleop_python/build/lib/robot_legion_teleop_python/potato_teleop_legion_key.py -> /home/jo-jo/ros2_ws/install/robot_legion_teleop_python/lib/python3.12/site-packages/robot_legion_teleop_python
+[0.527s] byte-compiling /home/jo-jo/ros2_ws/install/robot_legion_teleop_python/lib/python3.12/site-packages/robot_legion_teleop_python/potato_teleop_legion_key.py to potato_teleop_legion_key.cpython-312.pyc
+[0.528s] running install_data
+[0.529s] running install_egg_info
+[0.537s] removing '/home/jo-jo/ros2_ws/install/robot_legion_teleop_python/lib/python3.12/site-packages/robot_legion_teleop_python-0.0.1-py3.12.egg-info' (and everything under it)
+[0.537s] Copying ../../build/robot_legion_teleop_python/robot_legion_teleop_python.egg-info to /home/jo-jo/ros2_ws/install/robot_legion_teleop_python/lib/python3.12/site-packages/robot_legion_teleop_python-0.0.1-py3.12.egg-info
+[0.538s] running install_scripts
+[0.595s] Installing fpv_camera_mux script to /home/jo-jo/ros2_ws/install/robot_legion_teleop_python/lib/robot_legion_teleop_python
+[0.595s] Installing legion_teleop_key script to /home/jo-jo/ros2_ws/install/robot_legion_teleop_python/lib/robot_legion_teleop_python
+[0.595s] Installing potato_legion_teleop script to /home/jo-jo/ros2_ws/install/robot_legion_teleop_python/lib/robot_legion_teleop_python
+[0.595s] Installing reset_gz script to /home/jo-jo/ros2_ws/install/robot_legion_teleop_python/lib/robot_legion_teleop_python
+[0.595s] Installing robot_heartbeat script to /home/jo-jo/ros2_ws/install/robot_legion_teleop_python/lib/robot_legion_teleop_python
+[0.595s] writing list of installed files to '/home/jo-jo/ros2_ws/build/robot_legion_teleop_python/install.log'
+[0.609s] Invoked command in '/home/jo-jo/ros2_ws/src/robot_legion_teleop_python' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jo-jo/ros2_ws/build/robot_legion_teleop_python/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jo-jo/ros2_ws/install/robot_legion_teleop_python/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/robot_legion_teleop_python build --build-base /home/jo-jo/ros2_ws/build/robot_legion_teleop_python/build install --record /home/jo-jo/ros2_ws/build/robot_legion_teleop_python/install.log --single-version-externally-managed install_data
