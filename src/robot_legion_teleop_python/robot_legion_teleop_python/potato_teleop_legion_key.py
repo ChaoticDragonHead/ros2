@@ -385,7 +385,7 @@ class RobotLegionTeleop(Node):
                     print("pusherarm triggered")
                     #publishing message to joint
                     #self.armBaseJointPublisher_.publish(velocity=1) < does not work "Exception in teleop: Publisher.publish() got an unexpected keyword argument 'velocity'"
-                    self.armBaseJointPublisher_.publish(velocity=1)
+                    #need to add function here
 
                 else:
                     print(f"Unknown key: {repr(key)} (CTRL-C to quit).")
