@@ -210,6 +210,7 @@ class RobotLegionTeleop(Node):
     # -----------------------------------------------------------------------
     def _pusher_left(self):
         #Set velocity to -.1 unless joint position is greater than .25
+        print("Pusher left triggered")
         msg = JointState()
         msg.name = self.joint_names[7]
         msg.velocity = self.pusher_velocity
@@ -220,6 +221,7 @@ class RobotLegionTeleop(Node):
 
     def _pusher_right(self):
         #Set velocity to -.1 unless joint position is greater than .25
+        print("Pusher right triggered")
         msg = JointState()
         msg.name = self.joint_names[7]
         msg.velocity = self.pusher_velocity
@@ -230,6 +232,7 @@ class RobotLegionTeleop(Node):
     
     def _pusher_center(self):
         #Set velocity to -.1 unless joint position is greater than .25
+        print("Pusher center triggered")
         msg = JointState()
         msg.name = self.joint_names[7]
         msg.velocity = self.pusher_velocity
@@ -383,9 +386,17 @@ class RobotLegionTeleop(Node):
 
                 elif key in ('j', 'k', 'l'):
                     print("pusherarm triggered")
+                    if key == 'j':
+                        self._pusher_left()
+                    elif key == 'l':
+                        self._pusher_right()
+                    elif key == 'k':
+                        self._pusher_center()
+                    else:
+                        print("error - unexpected result. Key not in j, k, or l.")
                     #publishing message to joint
                     #self.armBaseJointPublisher_.publish(velocity=1) < does not work "Exception in teleop: Publisher.publish() got an unexpected keyword argument 'velocity'"
-                    self.armBaseJointPublisher_.publish(velocity=1)
+                    #need to add function here
 
                 else:
                     print(f"Unknown key: {repr(key)} (CTRL-C to quit).")
