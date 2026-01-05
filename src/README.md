@@ -26,3 +26,19 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
 -- Launch Keyboard Teleoperation Package
 
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+
+Queries for tutorials:
+how to publish a message to JOintStatePublisher ros2 jazzy gz 13.5.0
+how to publish velocity to joint ros2
+how to use jointstate publisher python ros2 jazzy (watch videos)
+how to control specific joints velocity ros2 jazzy python teleop script
+how to publish a velocity to a joint using joint state publisher ros2 python
+
+Tutorials to reference:
+https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html
+https://wiki.ros.org/urdf/Tutorials/Using%20urdf%20with%20robot_state_publisher
+https://answers.ros.org/question/335691/
+https://robotics.stackexchange.com/questions/112425/ros2-control-joint-state-broadcaster-publish-wrong-joint-velocity
+https://docs.ros.org/en/jazzy/p/joint_state_publisher/
+https://gazebosim.org/api/sim/9/jointcontrollers.html
