@@ -212,8 +212,8 @@ class RobotLegionTeleop(Node):
         #Set velocity to -.1 unless joint position is greater than .25
         print("Pusher left triggered")
         msg = JointState()
-        msg.name = self.joint_names[7]
-        msg.velocity = self.pusher_velocity
+        msg.name = 'arm_base_joint'
+        msg.velocity = [1,-1]
 
         print("Publishing to joint " + str(msg.name) + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.velocity))
         self.armBaseJointPublisher_.publish(msg)
@@ -223,8 +223,8 @@ class RobotLegionTeleop(Node):
         #Set velocity to -.1 unless joint position is greater than .25
         print("Pusher right triggered")
         msg = JointState()
-        msg.name = self.joint_names[7]
-        msg.velocity = self.pusher_velocity
+        msg.name = 'arm_base_joint'
+        msg.velocity = [1,-1]
 
         print("Publishing to joint " + str(msg.name) + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.velocity))
         self.armBaseJointPublisher_.publish(msg)
@@ -234,8 +234,8 @@ class RobotLegionTeleop(Node):
         #Set velocity to -.1 unless joint position is greater than .25
         print("Pusher center triggered")
         msg = JointState()
-        msg.name = self.joint_names[7]
-        msg.velocity = self.pusher_velocity
+        msg.name = 'arm_base_joint'
+        msg.velocity = [1,-1]
 
         print("Publishing to joint " + str(msg.name) + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.velocity))
         self.armBaseJointPublisher_.publish(msg)
