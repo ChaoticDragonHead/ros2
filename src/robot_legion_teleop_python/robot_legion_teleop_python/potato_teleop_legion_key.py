@@ -24,6 +24,7 @@ from geometry_msgs.msg import Twist
 from std_msgs.msg import String
 from std_msgs.msg import Float64 #Imported Float64 to publish float64 values to move joints in the robot
 from sensor_msgs.msg import JointState #Joint state publisher
+from std_msgs.msg import Float64MultiArray #Used to publish information for single or multiple joints
 
 
 def get_key(settings):
@@ -61,7 +62,9 @@ class RobotLegionTeleop(Node):
 
         #Publisher for arm joint movement
         # Old code for publisher > pusherArmJoint_pub = rospy.Publisher('/potatobot/arm_base_joint_velocity_controller/command', Float64, queue_size=10)
-        self.armBaseJointPublisher_ = self.create_publisher(JointState, '/arm_base_joint/cmd_vel', 10)
+        self.armBaseJointPublisher_ = self.create_publisher(Float64MultiArray, '/arm_base_joint/cmd_vel', 10)
+
+        self.velocity_ = [1] #One joint velocity
 
 
         self.pusher_velocity = 0.6 #velocity = mps
@@ -211,33 +214,30 @@ class RobotLegionTeleop(Node):
     def _pusher_left(self):
         #Set velocity to -.1 unless joint position is greater than .25
         print("Pusher left triggered")
-        msg = JointState()
-        msg.name = 'arm_base_joint'
-        msg.velocity = [1,-1]
+        msg = Float64MultiArray()
+        msg.data = self.velocity_
 
-        print("Publishing to joint " + str(msg.name) + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.velocity))
+        print("Publishing to joint" + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.data))
         self.armBaseJointPublisher_.publish(msg)
         print("Joint triggered")
 
     def _pusher_right(self):
         #Set velocity to -.1 unless joint position is greater than .25
         print("Pusher right triggered")
-        msg = JointState()
-        msg.name = 'arm_base_joint'
-        msg.velocity = [1,-1]
+        msg = Float64MultiArray()
+        msg.data = self.velocity_
 
-        print("Publishing to joint " + str(msg.name) + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.velocity))
+        print("Publishing to joint " + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.data))
         self.armBaseJointPublisher_.publish(msg)
         print("Joint triggered")
     
     def _pusher_center(self):
         #Set velocity to -.1 unless joint position is greater than .25
         print("Pusher center triggered")
-        msg = JointState()
-        msg.name = 'arm_base_joint'
-        msg.velocity = [1,-1]
+        msg = Float64MultiArray()
+        msg.data = self.velocity_
 
-        print("Publishing to joint " + str(msg.name) + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.velocity))
+        print("Publishing to joint " + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.data))
         self.armBaseJointPublisher_.publish(msg)
         print("Joint triggered")
 
