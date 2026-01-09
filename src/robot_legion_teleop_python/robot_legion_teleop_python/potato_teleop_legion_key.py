@@ -23,8 +23,8 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String
 from std_msgs.msg import Float64 #Imported Float64 to publish float64 values to move joints in the robot
-from sensor_msgs.msg import JointState #Joint state publisher
-from std_msgs.msg import Float64MultiArray #Used to publish information for single or multiple joints
+# from sensor_msgs.msg import JointState #Joint state publisher
+# from std_msgs.msg import Float64MultiArray #Used to publish information for single or multiple joints
 
 
 def get_key(settings):
