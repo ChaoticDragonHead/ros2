@@ -5,8 +5,10 @@ TODO:
 - Add gyroscope sensor to potatobot
 - Add functionality to auto trigger robot arm to right robot if it tips
 - Split one arm into two arms, lower them on the robot, and angle the pusher to make tipping function better
-- Add some weapon to the front joint (hammer, net, hook, etc)l
+- Add some weapon to the front joint (hammer, net, hook, etc)
+- INstall ubuntu and ros2 on RasPI
 
 Completed:
-- CHanged .yaml file to include multiple worlds in camera bridges to allow for greater functionality in getting camera to publish image when multiple test worlds are used
-- Add bridge in .yaml file for potatobot to listen to /arm_base_joint/cmd_ve
+- Changed .yaml file to include multiple worlds in camera bridges to allow for greater functionality in getting camera to publish image when multiple test worlds are used
+- Add bridge in .yaml file for potatobot to listen to /arm_base_joint/cmd_vel
+- Added functionality to move arm pusher
