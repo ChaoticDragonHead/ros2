@@ -42,3 +42,13 @@ https://answers.ros.org/question/335691/
 https://robotics.stackexchange.com/questions/112425/ros2-control-joint-state-broadcaster-publish-wrong-joint-velocity
 https://docs.ros.org/en/jazzy/p/joint_state_publisher/
 https://gazebosim.org/api/sim/9/jointcontrollers.html
+
+
+Launch script for testing world and potato python script
+
+ros2 launch my_robot_bringup two_robots_simple_test_xacro.launch.py
+ros2 run robot_legion_teleop_python potato_legion_teleop
+
+Troubleshooting:
+ros2 topic echo /arm_base_joint/cmd_vel < checks that ros is recieving outputs
+gz topic -e -t /arm_base_joint/cmd_vel < checks that gazebo is recieving outputs

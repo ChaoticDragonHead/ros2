@@ -62,9 +62,9 @@ class RobotLegionTeleop(Node):
 
         #Publisher for arm joint movement
         # Old code for publisher > pusherArmJoint_pub = rospy.Publisher('/potatobot/arm_base_joint_velocity_controller/command', Float64, queue_size=10)
-        self.armBaseJointPublisher_ = self.create_publisher(Float64MultiArray, '/arm_base_joint/cmd_vel', 10)
+        self.armBaseJointPublisher_ = self.create_publisher(Float64, '/arm_base_joint/cmd_vel', 10)
 
-        self.velocity_ = [1] #One joint velocity
+        self.velocity_ = 1.0 #One joint velocity
 
 
         self.pusher_velocity = 0.6 #velocity = mps
@@ -214,7 +214,7 @@ class RobotLegionTeleop(Node):
     def _pusher_left(self):
         #Set velocity to -.1 unless joint position is greater than .25
         print("Pusher left triggered")
-        msg = Float64MultiArray()
+        msg = Float64()
         msg.data = self.velocity_
 
         print("Publishing to joint" + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.data))
@@ -224,8 +224,8 @@ class RobotLegionTeleop(Node):
     def _pusher_right(self):
         #Set velocity to -.1 unless joint position is greater than .25
         print("Pusher right triggered")
-        msg = Float64MultiArray()
-        msg.data = self.velocity_
+        msg = Float64()
+        msg.data = -self.velocity_
 
         print("Publishing to joint " + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.data))
         self.armBaseJointPublisher_.publish(msg)
@@ -234,8 +234,8 @@ class RobotLegionTeleop(Node):
     def _pusher_center(self):
         #Set velocity to -.1 unless joint position is greater than .25
         print("Pusher center triggered")
-        msg = Float64MultiArray()
-        msg.data = self.velocity_
+        msg = Float64()
+        msg.data = 0.0
 
         print("Publishing to joint " + "\n ~~~ \n ~~~ \n Publishing velocity " + str(msg.data))
         self.armBaseJointPublisher_.publish(msg)
