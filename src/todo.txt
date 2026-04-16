@@ -7,6 +7,10 @@ TODO:
 - Split one arm into two arms, lower them on the robot, and angle the pusher to make tipping function better
 - Add some weapon to the front joint (hammer, net, hook, etc)
 - INstall ubuntu and ros2 on RasPI
+- Add password for potatobot control
+- Helium for flying robot?
+- openwrt
+- 
 
 Completed:
 - Changed .yaml file to include multiple worlds in camera bridges to allow for greater functionality in getting camera to publish image when multiple test worlds are used
